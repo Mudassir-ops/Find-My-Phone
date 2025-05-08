@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.parentallock.presentation.ongoingscreens.OnGoingFragmentItem">
+
+    <data>
+
+        <variable
+            name="onGoingModel"
+            type="com.example.findmyphone.domain.OnGoingScreenModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_onGoing"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_20sdp"
+            android:scaleType="fitCenter"
+            app:imageUrl="@{onGoingModel.imageRes}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.9" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_label_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@{onGoingModel.labelOne}"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_onGoing" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_label_second"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@{onGoingModel.labelSecond}"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_one" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

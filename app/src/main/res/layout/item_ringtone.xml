@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="ringtone"
+            type="com.example.findmyphone.presentation.fragments.home.RingtoneModels" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp"
+        android:background="@drawable/grid_item_background"
+        android:paddingVertical="@dimen/_8sdp">
+
+        <View
+            android:id="@+id/image_bg"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/ringotn_item_bg_shape"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/image_bg"
+            app:layout_constraintEnd_toEndOf="@+id/image_bg"
+            app:layout_constraintStart_toStartOf="@+id/image_bg"
+            app:layout_constraintTop_toTopOf="@+id/image_bg"
+            app:srcCompat="@drawable/air_horn" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:text="@string/air_horn"
+            android:textSize="@dimen/_10ssp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_bg" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="app_primary_color">#FF2389E6</color>
+    <color name="app_bg_color">#FFFAFBFF</color>
+    <color name="ringtone_bg_color">#FFE6EBFF</color>
+    <color name="card_bg_color">#FF2389E6</color>
+    <color name="track_color">#FFE8E8E8</color>
+</resources>

@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">FindMyPhone</string>
+    <string name="find_my_phone">Find My Phone</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
+    <string name="on_going_1st_top_label">Lost Your Phone?</string>
+    <string name="on_going_1st_bottom_label">Don’t worry! We have an easy solution for you.</string>
+    <string name="on_going_2nd_top_label">Activate Clap Alarm</string>
+    <string name="on_going_2nd_bottom_label">Clap your hands, and find your phone within seconds!</string>
+    <string name="on_going_3rd_top_label">Ringtone &amp; Flashlight</string>
+    <string name="on_going_3rd_bottom_label">Use ringtone and flashlight to find lost phone</string>
+    <string name="on_going_4th_top_label">Easy to Use</string>
+    <string name="on_going_4th_bottom_label">Activate in one tap and find your phone effortlessly!</string>
+
+
+    <string name="smart_parental_controls_give">Smart parental controls give\n</string>
+    <string name="you_peace_of_mind">you peace of mind</string>
+    <string name="get_device_from_child">Get Device From Child\n</string>
+    <string name="without_fight">Without Fight</string>
+    <string name="set_timer_select_allowed">Set timer, Select allowed\n</string>
+    <string name="apps_get_phone_back">apps, Get Phone Back</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
+    <string name="child_app_lock">Child App Lock</string>
+    <string name="custom_lock">Custom Lock</string>
+    <string name="instant_lock">Instant Lock</string>
+    <string name="unknown_calling">Unknown Calling</string>
+    <string name="unknown_calling_number">+92 303 6677888</string>
+    <string name="activate_now">Activate Now</string>
+    <string name="swipe_to_unlock">Swipe To Unlock</string>
+    <string name="instant_lock_activated">Instant Lock Activated</string>
+    <string name="custom_lock_activated">Custom Lock Activated</string>
+    <string name="apply_lock_on_custom_apps">Apply Custom Lock</string>
+    <string name="please_select_a_lock_option">Please select a lock option</string>
+    <string name="limited_screen_time">Limited screen time</string>
+    <string name="choose_which_app_are_allowed">Choose which app are allowed</string>
+    <string name="choose_lock_screen">Choose lock screen</string>
+    <string name="change_unlock_button_position">Change unlock button position</string>
+    <string name="multiple_unlock_method">Multiple unlock method</string>
+    <string name="settings">Settings</string>
+    <string name="more_apps">More Apps</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="share">Share</string>
+    <string name="about_us">About Us</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="no_launcher">No Launcher</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tap_to_activate">TAP TO ACTIVATE</string>
+    <string name="ringtone_volume">Ringtone Volume</string>
+    <string name="_80">80%</string>
+    <string name="flashlight_alert">Flashlight Alert</string>
+    <string name="select_from_your_phone">Select from your phone</string>
+    <string name="ringtone_s">Ringtone’s</string>
+    <string name="view_more">View more</string>
+    <string name="air_horn">Air Horn</string>
+
+
+</resources>

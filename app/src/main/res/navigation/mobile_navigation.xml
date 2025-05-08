@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_ongoing_parent">
+
+    <fragment
+        android:id="@+id/navigation_ongoing_parent"
+        android:name="com.example.findmyphone.presentation.fragments.ongoingscreens.OnGoingParentFragment"
+        android:label="OnGoing Parent"
+        tools:layout="@layout/fragment_on_going_parent" >
+        <action
+            android:id="@+id/action_navigation_ongoing_parent_to_navigation_home_fragment"
+            app:destination="@id/navigation_home_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home_fragment"
+        android:name="com.example.findmyphone.presentation.fragments.home.HomeFragmentFindMyPhone"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home_find_my_phone" />
+
+</navigation>
