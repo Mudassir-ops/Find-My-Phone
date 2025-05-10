@@ -13,8 +13,10 @@ import android.os.Parcelable
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.example.findmyphone.R
+import com.example.findmyphone.presentation.fragments.home.HomeFragmentFindMyPhone
 import com.example.findmyphone.presentation.fragments.settings.SettingsFindMyPhoneFragment
 import com.example.findmyphone.utils.all_extension.toast
+import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.dialogs.RateUsDialog
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
@@ -119,20 +121,34 @@ fun SettingsFindMyPhoneFragment.showRateDialog(
         }
     }
     if (rateUsDialog?.isAdded != true) {
-        rateUsDialog?.show(fragmentManager, "DealsErrorDialog")
+        rateUsDialog?.show(fragmentManager, "RateDialog")
     }
 }
-fun Context.feedBackWithEmail(title:String, message:String, emailId:String){
+
+fun Context.feedBackWithEmail(title: String, message: String, emailId: String) {
     try {
         val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.flags  = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        emailIntent.data  = Uri.parse("mailto:")
+        emailIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        emailIntent.data = Uri.parse("mailto:")
         emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailId))
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, title)
         emailIntent.putExtra(Intent.EXTRA_TEXT, message)
         this.startActivity(emailIntent)
 
-    }catch (e:java.lang.Exception){
+    } catch (e: java.lang.Exception) {
         e.printStackTrace()
+    }
+}
+
+fun HomeFragmentFindMyPhone.showExitDialog(
+    fragmentManager: FragmentManager
+) {
+    if (exitDialog == null) {
+        exitDialog = ExitDialog {
+            exitDialog = null
+        }
+    }
+    if (exitDialog?.isAdded != true) {
+        exitDialog?.show(fragmentManager, "ExitDialog")
     }
 }

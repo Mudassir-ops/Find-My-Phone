@@ -12,16 +12,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
+import com.example.findmyphone.databinding.ExitDialogBinding
 import com.example.findmyphone.databinding.RateUsDialogBinding
 import com.example.findmyphone.utils.feedBackWithEmail
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("SetTextI18n")
 @AndroidEntryPoint
-class RateUsDialog(
+class ExitDialog(
     private val dismissCallBack: () -> Unit
 ) : DialogFragment() {
-    private var _binding: RateUsDialogBinding? = null
+    private var _binding: ExitDialogBinding? = null
     private val binding get() = _binding
 
     override fun onStart() {
@@ -40,7 +41,7 @@ class RateUsDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): ConstraintLayout? {
-        _binding = RateUsDialogBinding.inflate(inflater, container, false)
+        _binding = ExitDialogBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -51,31 +52,9 @@ class RateUsDialog(
                 dismiss()
                 dismissCallBack.invoke()
             }
-            ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
-                ratingBar.rating = 0F
-                when (rating.toInt()) {
-                    in 1..3 -> {
-                        context?.feedBackWithEmail(
-                            title = "Feedback",
-                            message = "Any Feedback",
-                            emailId = "Cisco7865@gmail.com"
-                        )
-                        dismiss()
-                    }
-
-                    4, 5 -> {
-                        val packageName = context?.packageName
-                        val intent = Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse("market://details?id=$packageName")
-                        )
-                        context?.startActivity(intent)
-                        dismiss()
-                    }
-                }
-            }
-            btnRateUs.setOnClickListener {
+            btnDone.setOnClickListener {
                 dismiss()
+                activity?.finishAffinity()
             }
         }
     }
