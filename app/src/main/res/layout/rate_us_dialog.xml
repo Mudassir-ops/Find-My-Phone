@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rate_us_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@drawable/bg_rate_us_card"
+    android:padding="@dimen/_16sdp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:contentDescription="Close"
+        android:src="@drawable/cross_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="center"
+        android:text="Do you like\nFind my phone?"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_close" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:gravity="center"
+        android:text="@string/we_try_our_best_to_improve_user_experience_please_rate_our_app_and_appreciate_us"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:max="5"
+        android:numStars="5"
+        android:progress="2"
+        android:progressTint="#FF41DD07"
+        android:stepSize="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/btn_rate_us"
+        app:layout_constraintEnd_toEndOf="@id/tv_message"
+        app:layout_constraintStart_toStartOf="@id/tv_message"
+        app:layout_constraintTop_toBottomOf="@id/tv_message" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_rate_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:paddingHorizontal="@dimen/_30ssp"
+        android:text="Rate Us"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_14ssp"
+        app:backgroundTint="#FF3E3E3E"
+        app:cornerRadius="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ratingBar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
