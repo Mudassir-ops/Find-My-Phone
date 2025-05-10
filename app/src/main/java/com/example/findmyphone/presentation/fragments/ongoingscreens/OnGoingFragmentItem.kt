@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.example.findmyphone.R
 import com.example.findmyphone.databinding.FragmentOnGoingFragmentItemBinding
 import com.example.findmyphone.domain.OnGoingScreenModel
-import com.example.parentallock.utils.AppConstants.ON_GOING_DATA_MODEL
+import com.example.findmyphone.utils.AppConstants.ON_GOING_DATA_MODEL
 import com.example.findmyphone.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.findmyphone.utils.parcelable

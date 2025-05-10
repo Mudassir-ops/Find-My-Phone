@@ -23,7 +23,7 @@ fun MaterialButton.setupNextButton(
 
             currentItem == lastItemIndex -> {
                 if (navController.currentDestination?.id == R.id.navigation_ongoing_parent) {
-                    navController.navigate(R.id.action_navigation_ongoing_parent_to_navigation_home_fragment)
+                    navController.navigate(R.id.action_navigation_ongoing_parent_to_navigation_permission)
                 }
             }
         }

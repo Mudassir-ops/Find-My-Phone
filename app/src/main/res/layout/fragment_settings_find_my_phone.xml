@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.fragments.settings.SettingsFindMyPhoneFragment">
+
+    <include
+        android:id="@+id/header_layout"
+        layout="@layout/header_layout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_sound_sensitivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_volume_border"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_layout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivVolumeLabel"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/seekBarVolume"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/soun_sensitivity" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvVolumeLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/sound_sensitivity"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/ivVolumeLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivVolumeLabel"
+            app:layout_constraintTop_toTopOf="@id/ivVolumeLabel" />
+
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBarVolume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:max="100"
+            android:maxHeight="8dp"
+            android:minHeight="8dp"
+            android:progress="100"
+            android:progressDrawable="@drawable/seekbar_style"
+            android:splitTrack="false"
+            android:thumb="@drawable/custom_thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvVolumeLabel" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/medium"
+            app:layout_constraintEnd_toStartOf="@+id/tvHigh"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBarVolume" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/high"
+            app:layout_constraintEnd_toStartOf="@id/tvVeryHigh"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/tvMedium"
+            app:layout_constraintTop_toBottomOf="@+id/seekBarVolume" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvVeryHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/very_high"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/tvHigh"
+            app:layout_constraintTop_toBottomOf="@+id/seekBarVolume" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_flash_light_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_volume_border"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_sound_sensitivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_flash_light_Label"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/seekBar_flash"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/flash_light" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchFlashlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:checked="true"
+            app:layout_constraintBottom_toTopOf="@+id/seekBar_flash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/app_primary_color"
+            app:trackTint="@color/track_color" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvFlashLight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/flash_light_alert"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_flash_light_Label"
+            app:layout_constraintEnd_toStartOf="@+id/switchFlashlight"
+            app:layout_constraintStart_toEndOf="@id/iv_flash_light_Label"
+            app:layout_constraintTop_toTopOf="@id/iv_flash_light_Label" />
+
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBar_flash"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:max="100"
+            android:maxHeight="8dp"
+            android:minHeight="8dp"
+            android:progress="100"
+            android:progressDrawable="@drawable/seekbar_style"
+            android:splitTrack="false"
+            android:thumb="@drawable/custom_thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFlashLight" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTooShort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/too_short"
+            app:layout_constraintEnd_toStartOf="@+id/tvShort"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar_flash" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvShort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/short_"
+            app:layout_constraintEnd_toStartOf="@id/tvLong"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/tvTooShort"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar_flash" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvLong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/long_"
+            app:layout_constraintEnd_toStartOf="@+id/tvToo_Long"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/tvShort"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar_flash" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvToo_Long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/too_long"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/tvLong"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar_flash" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_schedule_deactivation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_volume_border"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_flash_light_header">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_schedule_deactivation_Label"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/tvStartTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/calender" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchSchedule_deactivation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:checked="true"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_schedule_deactivation_Label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/app_primary_color"
+            app:trackTint="@color/track_color" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSchedule_deactivation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/schedule_deactivation"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_schedule_deactivation_Label"
+            app:layout_constraintEnd_toStartOf="@+id/switchSchedule_deactivation"
+            app:layout_constraintStart_toEndOf="@id/iv_schedule_deactivation_Label"
+            app:layout_constraintTop_toTopOf="@id/iv_schedule_deactivation_Label" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/view_start_picker"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/iv_schedule_deactivation_Label"
+            app:layout_constraintTop_toBottomOf="@+id/iv_schedule_deactivation_Label" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_start_picker"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/picker_shape"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStartTime"
+            app:layout_constraintEnd_toStartOf="@+id/tvEndTime"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@+id/tvStartTime"
+            app:layout_constraintTop_toTopOf="@+id/tvStartTime">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvStartPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hedvig_letters_sans"
+                android:text="@string/_12_00"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@string/end"
+            app:layout_constraintBottom_toBottomOf="view_end_picker"
+            app:layout_constraintEnd_toStartOf="@+id/view_end_picker"
+            app:layout_constraintStart_toEndOf="@+id/view_start_picker"
+            app:layout_constraintTop_toTopOf="@+id/view_end_picker" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_end_picker"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="wrap_content"
+
+
+            android:background="@drawable/picker_shape"
+            app:layout_constraintBottom_toBottomOf="@+id/view_start_picker"
+            app:layout_constraintEnd_toEndOf="@id/switchSchedule_deactivation"
+            app:layout_constraintStart_toEndOf="@+id/tvEndTime"
+            app:layout_constraintTop_toTopOf="@+id/view_start_picker">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvEndPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hedvig_letters_sans"
+                android:text="@string/_12_00"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

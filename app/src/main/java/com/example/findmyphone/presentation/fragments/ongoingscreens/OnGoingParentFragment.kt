@@ -10,7 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.findmyphone.R
 import com.example.findmyphone.databinding.FragmentOnGoingParentBinding
 import com.example.findmyphone.domain.OnGoingScreenModel
-import com.example.parentallock.utils.AppConstants.ON_GOING_DATA_MODEL
+import com.example.findmyphone.utils.AppConstants.ON_GOING_DATA_MODEL
 import com.example.findmyphone.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference

@@ -60,4 +60,42 @@
     <string name="air_horn">Air Horn</string>
 
 
+    <string name="permissionenabled">This Application will never use take any personal information but we need following permissions to run application perfectly. Thanks</string>
+    <string name="privacy_policy_tv"><u>Privacy Policy</u></string>
+    <string name="android_apps">Android Apps</string>
+    <string name="permission_message">Please we required permission to run application</string>
+    <string name="terms_of_use_cap">Terms Of Use</string>
+    <string name="whistle_detection">Service is running to detect Clap</string>
+
+
+    <string name="exit">Exit</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="exit_dialog">EXIT </string>
+    <string name="EXITorNO">Are you sure you want to exit?</string>
+    <string name="app_permissions">App Permission</string>
+    <string name="accept">Accept</string>
+    <string name="camera_access">Camera Access</string>
+    <string name="microphone_access">Microphone access</string>
+    <string name="overlay_permissions">Overlay permissions</string>
+    <string name="audio_recording_permission">Audio recording permission</string>
+    <string name="notification_permission">Notification permission</string>
+    <string name="setting">Setting</string>
+    <string name="sound_sensitivity">Sound Sensitivity</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="very_high">Very High</string>
+    <string name="flash_light_alert">Flash Light Alert</string>
+    <string name="too_short">Too Short</string>
+    <string name="short_">Short</string>
+    <string name="long_">Long</string>
+    <string name="too_long">Too Long</string>
+    <string name="start">Start</string>
+    <string name="_12_00">12:00</string>
+    <string name="end">End</string>
+    <string name="schedule_deactivation">Schedule Deactivation</string>
+
 </resources>

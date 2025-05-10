@@ -7,19 +7,21 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_back"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
         android:layout_marginHorizontal="@dimen/_5sdp"
-        android:visibility="gone"
+        android:scaleType="fitCenter"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/tv_header_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_header_title" />
+        app:layout_constraintTop_toTopOf="@+id/tv_header_title"
+        app:srcCompat="@drawable/back_arrow" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_header_title"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_7sdp"
         android:fontFamily="@font/hedvig_letters_sans"
         android:gravity="center_vertical"
         android:text="@string/find_my_phone"

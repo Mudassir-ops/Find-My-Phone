@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_3sdp"
+        android:layout_margin="@dimen/_4sdp"
         android:background="@drawable/grid_item_background"
         android:paddingVertical="@dimen/_6sdp">
 
@@ -42,7 +42,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/hedvig_letters_sans"
             android:text="@{ringtone.ringtoneTitle}"
