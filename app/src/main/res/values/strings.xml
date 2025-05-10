@@ -8,13 +8,13 @@
 
 
     <string name="on_going_1st_top_label">Lost Your Phone?</string>
-    <string name="on_going_1st_bottom_label">Don’t worry! We have an easy solution for you.</string>
+    <string name="on_going_1st_bottom_label">"Don’t worry! We have an easy solution for you."</string>
     <string name="on_going_2nd_top_label">Activate Clap Alarm</string>
-    <string name="on_going_2nd_bottom_label">Clap your hands, and find your phone within seconds!</string>
+    <string name="on_going_2nd_bottom_label">"Clap your hands, and find your phone within seconds!"</string>
     <string name="on_going_3rd_top_label">Ringtone &amp; Flashlight</string>
-    <string name="on_going_3rd_bottom_label">Use ringtone and flashlight to find lost phone</string>
+    <string name="on_going_3rd_bottom_label">"Use ringtone and flashlight to find lost phone"</string>
     <string name="on_going_4th_top_label">Easy to Use</string>
-    <string name="on_going_4th_bottom_label">Activate in one tap and find your phone effortlessly!</string>
+    <string name="on_going_4th_bottom_label">"Activate in one tap and find your phone effortlessly!"</string>
 
 
     <string name="smart_parental_controls_give">Smart parental controls give\n</string>

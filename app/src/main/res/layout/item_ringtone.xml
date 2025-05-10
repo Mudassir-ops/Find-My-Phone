@@ -12,9 +12,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_4sdp"
+        android:layout_margin="@dimen/_3sdp"
         android:background="@drawable/grid_item_background"
-        android:paddingVertical="@dimen/_8sdp">
+        android:paddingVertical="@dimen/_6sdp">
 
         <View
             android:id="@+id/image_bg"
@@ -22,29 +22,31 @@
             android:layout_height="@dimen/_50sdp"
             android:background="@drawable/ringotn_item_bg_shape"
             android:padding="@dimen/_12sdp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:scaleType="fitCenter"
+            app:imageUrl="@{ringtone.imageSrc}"
             app:layout_constraintBottom_toBottomOf="@+id/image_bg"
             app:layout_constraintEnd_toEndOf="@+id/image_bg"
             app:layout_constraintStart_toStartOf="@+id/image_bg"
-            app:layout_constraintTop_toTopOf="@+id/image_bg"
-            app:srcCompat="@drawable/air_horn" />
+            app:layout_constraintTop_toTopOf="@+id/image_bg" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/_5sdp"
-            android:text="@string/air_horn"
-            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/hedvig_letters_sans"
+            android:text="@{ringtone.ringtoneTitle}"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

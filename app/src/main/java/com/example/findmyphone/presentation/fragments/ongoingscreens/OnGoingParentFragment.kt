@@ -24,20 +24,20 @@ class OnGoingParentFragment : Fragment(R.layout.fragment_on_going_parent) {
         arrayOf(
             OnGoingScreenModel(
                 labelOne = getString(R.string.on_going_1st_top_label),
-                labelSecond = getString(R.string.on_going_1st_bottom_label) + getString(R.string.you_peace_of_mind),
-                imageRes = R.drawable.on_going_first
+                labelSecond = getString(R.string.on_going_1st_bottom_label),
+                imageRes = R.drawable.on_going_1
             ), OnGoingScreenModel(
-                labelOne = getString(R.string.on_going_2nd_top_label) + getString(R.string.without_fight),
+                labelOne = getString(R.string.on_going_2nd_top_label),
                 labelSecond = getString(R.string.on_going_2nd_bottom_label),
-                imageRes = R.drawable.on_going_second
+                imageRes = R.drawable.on_going_2
             ), OnGoingScreenModel(
-                labelOne = getString(R.string.on_going_3rd_top_label) + getString(R.string.apps_get_phone_back),
+                labelOne = getString(R.string.on_going_3rd_top_label),
                 labelSecond = getString(R.string.on_going_3rd_bottom_label),
-                imageRes = R.drawable.on_going_third
+                imageRes = R.drawable.on_going_3
             ), OnGoingScreenModel(
-                labelOne = getString(R.string.on_going_4th_top_label) + getString(R.string.apps_get_phone_back),
+                labelOne = getString(R.string.on_going_4th_top_label),
                 labelSecond = getString(R.string.on_going_4th_bottom_label),
-                imageRes = R.drawable.on_going_fourth
+                imageRes = R.drawable.lost_phone_home_screen
             )
         )
     }
