@@ -1,39 +1,18 @@
 package com.example.findmyphone.data.core
 
 import android.app.Service
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
 import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE
-import android.hardware.Camera
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraManager
-import android.media.AudioManager
-import android.media.MediaPlayer
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
-import android.os.Handler
 import android.os.HandlerThread
 import android.os.IBinder
 import android.os.Looper
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.util.Log
-import android.widget.RemoteViews
 import androidx.core.app.ServiceCompat
 import com.example.findmyphone.data.other.DetectionRepository
 import com.example.findmyphone.data.other.NotificationRepository
 import com.example.findmyphone.utils.Logs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import org.greenrobot.eventbus.EventBus
-import java.io.IOException
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -103,7 +82,6 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
     }
 
     override fun onDestroy() {
-        Log.d("DetectionService", "Service onDestroy")
         val recorderThread2 = this.recorderThread
         if (recorderThread2 != null) {
             recorderThread2.stopRecording()

@@ -74,7 +74,6 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
                 }
             }
             btnActivate.setOnClickListener {
-                Logs.createLog("isServiceEnabled-->$isServiceEnabled")
                 if (isServiceEnabled) {
                     stopService()
                 } else {
@@ -119,7 +118,6 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.serviceState.flowWithLifecycle(lifecycle).collect { state ->
                 binding?.btnActivate?.apply {
-                    Logs.createLog("isServiceEnabledObserveServiceState-->$state")
                     isServiceEnabled = state
                     if (state) {
                         setAnimation(R.raw.deactivate_aniamtion)

@@ -1,7 +1,5 @@
 package com.example.findmyphone.domain.repository
 
-import android.app.Service.CAMERA_SERVICE
-import android.app.Service.VIBRATOR_SERVICE
 import android.content.Context
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
@@ -9,11 +7,9 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.os.Build
-import android.os.Handler
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
-import android.util.Log
 import com.example.findmyphone.data.other.DetectionRepository
 import com.example.findmyphone.utils.Logs
 import kotlinx.coroutines.CoroutineScope
