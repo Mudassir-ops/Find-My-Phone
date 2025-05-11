@@ -43,7 +43,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/step_1"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subTitle" />
@@ -83,7 +83,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/step_2"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/step1Card" />
@@ -111,6 +111,7 @@
                         android:fontFamily="@font/hedvig_letters_sans"
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:text="@string/double_clap_and_trigger_the_phone"
+                        android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11ssp" />
 
@@ -124,7 +125,7 @@
                 android:layout_marginTop="@dimen/_16sdp"
                 android:text="@string/step_3"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/step2Card" />
@@ -165,7 +166,7 @@
                 android:layout_marginTop="@dimen/_16sdp"
                 android:text="@string/step_4"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/step3Card" />
@@ -206,7 +207,7 @@
                 android:layout_marginTop="@dimen/_16sdp"
                 android:text="@string/step_5"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/step4Card" />
