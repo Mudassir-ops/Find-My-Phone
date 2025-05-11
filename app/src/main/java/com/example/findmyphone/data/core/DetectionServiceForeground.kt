@@ -23,7 +23,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
     private var mServiceLooper: Looper? = null
     private var recorderThread: RecorderThread? = null
     private var lastWhistleTime: Long = 0
-    private val whistleCooldown: Long = 10_000
+    private val whistleCooldown: Long = 5000
 
     @Inject
     lateinit var notificationRepository: NotificationRepository
@@ -99,7 +99,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
     override fun onWhistleDetected() {
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastWhistleTime < whistleCooldown) {
-            Logs.createLog("onWhistleIgnored: within cooldown")
+            Logs.createLog("onWhistleIgnored: within cooldown$lastWhistleTime")
             return
         }
         lastWhistleTime = currentTime

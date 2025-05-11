@@ -14,5 +14,6 @@ object AppConstants {
     const val DETECTION_MODE = "detection_mode"
     const val FLASH_LIGHT_THRESHOLD = "flash_light_threshold"
     const val DEACTIVATION_TIME = "deactivation_time"
+    const val VOLUME_LEVEL = "volume_level"
 
 }

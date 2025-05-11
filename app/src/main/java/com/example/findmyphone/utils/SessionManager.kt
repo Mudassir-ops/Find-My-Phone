@@ -1,11 +1,13 @@
 package com.example.findmyphone.utils
 
 import android.content.SharedPreferences
+import com.example.findmyphone.R
 import com.example.findmyphone.utils.AppConstants.DEACTIVATION_TIME
 import com.example.findmyphone.utils.AppConstants.DETECTION_MODE
 import com.example.findmyphone.utils.AppConstants.FLASH_LIGHT_THRESHOLD
 import com.example.findmyphone.utils.AppConstants.IS_FLASH_LIGHT_ON
 import com.example.findmyphone.utils.AppConstants.MY_RINGTONE
+import com.example.findmyphone.utils.AppConstants.VOLUME_LEVEL
 import javax.inject.Inject
 
 class SessionManager @Inject constructor(private val preferences: SharedPreferences?) {
@@ -40,12 +42,12 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
 
 
     // Ringtone preference
-    fun setRingtone(ringtone: String) {
+    fun setRingtone(ringtone: Int) {
         setPreference(MY_RINGTONE, ringtone)
     }
 
-    fun getRingtone(): String? {
-        return getPreference(MY_RINGTONE, "")
+    fun getRingtone(): Int? {
+        return getPreference(MY_RINGTONE, R.raw.door_bell)
     }
 
     // Flashlight state preference
@@ -67,12 +69,12 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
     }
 
     // Flashlight threshold preference
-    fun setFlashlightThreshold(threshold: Int) {
+    fun setFlashlightThreshold(threshold: Long) {
         setPreference(FLASH_LIGHT_THRESHOLD, threshold)
     }
 
-    fun getFlashlightThreshold(): Int? {
-        return getPreference(FLASH_LIGHT_THRESHOLD, 0)
+    fun getFlashlightThreshold(): Long? {
+        return getPreference(FLASH_LIGHT_THRESHOLD, 400L)
     }
 
     // Deactivation time preference
@@ -82,6 +84,15 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
 
     fun getDeactivationTime(): Long? {
         return getPreference(DEACTIVATION_TIME, 0L)
+    }
+
+    // Volume  preference
+    fun setVolumeLevel(time: Int) {
+        setPreference(VOLUME_LEVEL, time)
+    }
+
+    fun getVolumeLevel(): Int? {
+        return getPreference(VOLUME_LEVEL, 0)
     }
 
 }

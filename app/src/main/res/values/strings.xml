@@ -113,5 +113,6 @@
     <string name="step_2">Step 2</string>
     <string name="tap_on_the_activate_button_to_enable_the_feature">Tap on the Activate button to enable the "Clap to Find" feature.</string>
     <string name="step_1">Step 1</string>
+    <string name="volume_level">%1$s %%</string>
 
 </resources>

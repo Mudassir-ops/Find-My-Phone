@@ -32,7 +32,7 @@ class DetectionRepositoryImpl : DetectionRepository {
 
     private val flashDelay = 1200L
     private val vibrationDuration = 900L
-    private val clapThreshold = 500L
+    private val clapThreshold = 1000L
 
     private var lastClapTime = 0L
     private var isDoubleClap = false
@@ -64,11 +64,12 @@ class DetectionRepositoryImpl : DetectionRepository {
         val timeSinceLastClap = currentTime - lastClapTime
         lastClapTime = currentTime
         isDoubleClap = timeSinceLastClap <= clapThreshold
-        if (isDoubleClap) {
-            playRingtone(context)
-            vibrateDevice(context)
-            flashSequence(context)
-        }
+        playRingtone(context)
+        vibrateDevice(context)
+        flashSequence(context)
+//        if (isDoubleClap) {
+//
+//        }
     }
 
     private fun handleWhistleDetectionLogic(context: Context) {
