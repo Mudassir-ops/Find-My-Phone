@@ -29,7 +29,7 @@ import java.io.IOException
 
 class DetectionRepositoryImpl : DetectionRepository {
 
-    private val _isServiceRunningStateFlow = MutableStateFlow<Boolean>(false)
+    private val _isServiceRunningStateFlow = MutableStateFlow(false)
     override val isServiceRunningStateFlow: StateFlow<Boolean> =
         _isServiceRunningStateFlow.asStateFlow()
 
@@ -208,10 +208,8 @@ class DetectionRepositoryImpl : DetectionRepository {
         mediaPlayer = null
     }
 
-    override fun isServiceRunning(isServiceRunning: Boolean) {
-        scope.launch {
-            _isServiceRunningStateFlow.emit(isServiceRunning)
-        }
+    override suspend fun isServiceRunning(isServiceRunning: Boolean) {
+        _isServiceRunningStateFlow.emit(isServiceRunning)
     }
 }
 

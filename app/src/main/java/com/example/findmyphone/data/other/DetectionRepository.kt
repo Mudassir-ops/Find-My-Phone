@@ -10,6 +10,6 @@ interface DetectionRepository {
     fun onClapDetected(context: Context)
     fun clearResources(context: Context)
 
-    fun isServiceRunning(isServiceRunning: Boolean)
+    suspend fun isServiceRunning(isServiceRunning: Boolean)
 
 }

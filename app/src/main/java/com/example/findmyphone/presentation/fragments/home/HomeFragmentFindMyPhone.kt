@@ -15,6 +15,7 @@ import com.example.findmyphone.R
 import com.example.findmyphone.data.core.DetectionServiceForeground
 import com.example.findmyphone.databinding.FragmentHomeFindMyPhoneBinding
 import com.example.findmyphone.presentation.viewmodels.HomeViewModel
+import com.example.findmyphone.utils.Logs
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.showExitDialog
 import com.example.findmyphone.utils.viewBinding
@@ -27,6 +28,7 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
     private var myDeviceAppsAdapter: FindMyPhoneRingtoneAdapter? = null
     private val viewModel by activityViewModels<HomeViewModel>()
     var exitDialog: ExitDialog? = null
+    private var isServiceEnabled = false
     private val onGoingPagesList: List<RingtoneModels> by lazy {
         listOf(
             RingtoneModels(imageSrc = R.drawable.air_horn, ringtoneTitle = "Air Horn"),
@@ -72,7 +74,12 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
                 }
             }
             btnActivate.setOnClickListener {
-                startService()
+                Logs.createLog("isServiceEnabled-->$isServiceEnabled")
+                if (isServiceEnabled) {
+                    stopService()
+                } else {
+                    startService()
+                }
             }
             headerLayout.ivSettings.setOnClickListener {
                 val navController = it.findNavController()
@@ -90,10 +97,19 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
 
     private fun startService() {
         try {
+            viewModel.isServiceRunning(isServiceRunning = true)
             ContextCompat.startForegroundService(
-                context ?: return,
-                Intent(context ?: return, DetectionServiceForeground::class.java)
+                context ?: return, Intent(context ?: return, DetectionServiceForeground::class.java)
             )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun stopService() {
+        try {
+            viewModel.isServiceRunning(isServiceRunning = false)
+            context?.stopService(Intent(context ?: return, DetectionServiceForeground::class.java))
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -103,12 +119,16 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.serviceState.flowWithLifecycle(lifecycle).collect { state ->
                 binding?.btnActivate?.apply {
-                    isClickable = !state
-                    isEnabled = !state
+                    Logs.createLog("isServiceEnabledObserveServiceState-->$state")
+                    isServiceEnabled = state
                     if (state) {
                         setAnimation(R.raw.deactivate_aniamtion)
+                        binding?.tvTapToActivate?.text =
+                            resources.getString(R.string.tap_to_deactivate)
                     } else {
                         setAnimation(R.raw.activate_animation)
+                        binding?.tvTapToActivate?.text =
+                            resources.getString(R.string.tap_to_activate)
                     }
                     repeatCount = LottieDrawable.INFINITE
                     playAnimation()
