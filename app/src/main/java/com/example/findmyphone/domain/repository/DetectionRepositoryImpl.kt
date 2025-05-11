@@ -21,10 +21,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 class DetectionRepositoryImpl : DetectionRepository {
+
+    private val _isServiceRunningStateFlow = MutableStateFlow<Boolean>(false)
+    override val isServiceRunningStateFlow: StateFlow<Boolean> =
+        _isServiceRunningStateFlow.asStateFlow()
+
 
     private val flashDelay = 1200L
     private val vibrationDuration = 900L
@@ -200,6 +208,11 @@ class DetectionRepositoryImpl : DetectionRepository {
         mediaPlayer = null
     }
 
+    override fun isServiceRunning(isServiceRunning: Boolean) {
+        scope.launch {
+            _isServiceRunningStateFlow.emit(isServiceRunning)
+        }
+    }
 }
 
 

@@ -6,19 +6,26 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.airbnb.lottie.LottieDrawable
 import com.example.findmyphone.R
 import com.example.findmyphone.data.core.DetectionServiceForeground
 import com.example.findmyphone.databinding.FragmentHomeFindMyPhoneBinding
+import com.example.findmyphone.presentation.viewmodels.HomeViewModel
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.showExitDialog
 import com.example.findmyphone.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
     private val binding by viewBinding(FragmentHomeFindMyPhoneBinding::bind)
     private var myDeviceAppsAdapter: FindMyPhoneRingtoneAdapter? = null
+    private val viewModel by activityViewModels<HomeViewModel>()
     var exitDialog: ExitDialog? = null
     private val onGoingPagesList: List<RingtoneModels> by lazy {
         listOf(
@@ -42,6 +49,7 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
         super.onViewCreated(view, savedInstanceState)
         clickListeners()
         setupRingtoneRecyclerView()
+        observeServiceState()
     }
 
     private fun setupRingtoneRecyclerView() {
@@ -88,6 +96,24 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
             )
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    private fun observeServiceState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.serviceState.flowWithLifecycle(lifecycle).collect { state ->
+                binding?.btnActivate?.apply {
+                    isClickable = !state
+                    isEnabled = !state
+                    if (state) {
+                        setAnimation(R.raw.deactivate_aniamtion)
+                    } else {
+                        setAnimation(R.raw.activate_animation)
+                    }
+                    repeatCount = LottieDrawable.INFINITE
+                    playAnimation()
+                }
+            }
         }
     }
 }

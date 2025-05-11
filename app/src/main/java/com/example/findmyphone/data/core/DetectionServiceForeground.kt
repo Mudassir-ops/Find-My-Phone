@@ -28,6 +28,10 @@ import com.example.findmyphone.data.other.DetectionRepository
 import com.example.findmyphone.data.other.NotificationRepository
 import com.example.findmyphone.utils.Logs
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import java.io.IOException
 import javax.inject.Inject
@@ -66,6 +70,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
         } else {
             startForeground(1, notification)
         }
+        detectionRepository.isServiceRunning(isServiceRunning = true)
         startHandler()
     }
 
@@ -100,7 +105,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
 
     override fun onDestroy() {
         Log.d("DetectionService", "Service onDestroy")
-
+        detectionRepository.isServiceRunning(isServiceRunning = false)
         val recorderThread2 = this.recorderThread
         if (recorderThread2 != null) {
             recorderThread2.stopRecording()

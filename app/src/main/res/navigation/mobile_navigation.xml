@@ -53,6 +53,16 @@
         android:id="@+id/navigation_settings"
         android:name="com.example.findmyphone.presentation.fragments.settings.SettingsFindMyPhoneFragment"
         android:label="Settings Fragment"
-        tools:layout="@layout/fragment_settings_find_my_phone" />
+        tools:layout="@layout/fragment_settings_find_my_phone">
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_how_to_use"
+            app:destination="@id/navigation_how_to_use" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_how_to_use"
+        android:name="com.example.findmyphone.presentation.fragments.howtouse.HowToUseFragment"
+        android:label="How To Use Fragment"
+        tools:layout="@layout/fragment_how_to_use" />
 
 </navigation>

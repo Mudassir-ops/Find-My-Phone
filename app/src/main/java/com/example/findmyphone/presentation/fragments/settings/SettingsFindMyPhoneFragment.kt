@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.findmyphone.R
 import com.example.findmyphone.databinding.FragmentSettingsFindMyPhoneBinding
@@ -34,6 +35,15 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
             layoutRateApp.setOnClickListener {
                 this@SettingsFindMyPhoneFragment.showRateDialog(fragmentManager = childFragmentManager)
             }
+
+            layoutHowToUse.setOnClickListener {
+                val navController = it.findNavController()
+                val currentDestId = navController.currentDestination?.id
+                if (currentDestId == R.id.navigation_settings) {
+                    navController.navigate(R.id.action_navigation_settings_to_navigation_how_to_use)
+                }
+            }
+
         }
     }
 }

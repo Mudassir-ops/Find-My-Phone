@@ -28,8 +28,11 @@ class RateUsDialog(
         super.onStart()
         dialog?.window?.apply {
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val margin = 32
+            val marginPx = (margin * resources.displayMetrics.density).toInt()
+            val width = resources.displayMetrics.widthPixels - (2 * marginPx)
             setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
+                width,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
