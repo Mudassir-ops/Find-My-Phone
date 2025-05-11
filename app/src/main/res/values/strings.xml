@@ -100,8 +100,8 @@
     <string name="share_app">Share the App</string>
     <string name="rate_the_app">Rate the App</string>
     <string name="how_to_use">How to use?</string>
-    <string name="we_try_our_best_to_improve_user_experience_please_rate_our_app_and_appreciate_us">We try our best to improve user experience. Please Rate our app and appreciate us.</string>
-    <string name="enable_your_phone_to_listen_for_a_specific_number_of_claps_e_g_3_quick_claps_and_respond_by_ringing_loudly_vibrating_or_flashing_the_flashlight_even_if_it_s_on_silent_mode">Enable your phone to listen for a specific number of claps (e.g., 3 quick claps) and respond by ringing loudly, vibrating, or flashing the flashlight—even if it\'s on silent mode.</string>
+    <string name="we_try_our_best">We try our best to improve user experience. Please Rate our app and appreciate us.</string>
+    <string name="enable_your_phone_to_listen">Enable your phone to listen for a specific number of claps (e.g., 3 quick claps) and respond by ringing loudly, vibrating, or flashing the flashlight—even if it\'s on silent mode.</string>
     <string name="test_it_out_clap_your_hands">Test It Out – Clap your hands, and your phone should ring or flash immediately!</string>
     <string name="step_5">Step 5</string>
     <string name="tap_start_the_app_will_now_listen_for_your_clap_pattern_in_the_background">Tap Start – The app will now listen for your clap pattern in the background.</string>

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/_14sdp">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/header_layout"
@@ -20,7 +19,21 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/subTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/enable_your_phone_to_listen"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -33,7 +46,7 @@
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/subTitle" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/step1Card"
@@ -42,19 +55,20 @@
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
+                app:cardElevation="1dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/step1Title">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_16sdp">
+                    android:paddingVertical="@dimen/_20sdp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/step1Desc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:text="@string/tap_on_the_activate_button_to_enable_the_feature"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11ssp" />
@@ -88,13 +102,14 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_16sdp">
+                    android:paddingVertical="@dimen/_20sdp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/step2Desc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/hedvig_letters_sans"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:text="@string/double_clap_and_trigger_the_phone"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11ssp" />
@@ -128,13 +143,14 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_16sdp">
+                    android:paddingVertical="@dimen/_20sdp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/step3Desc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/hedvig_letters_sans"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:text="@string/choose_alert_type_pick_sound_vibration_flashlight_or_all"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11ssp" />
@@ -168,13 +184,14 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_16sdp">
+                    android:paddingVertical="@dimen/_20sdp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/step4Desc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/hedvig_letters_sans"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:text="@string/tap_start_the_app_will_now_listen_for_your_clap_pattern_in_the_background"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11ssp" />
@@ -208,13 +225,14 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_16sdp">
+                    android:paddingVertical="@dimen/_20sdp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/step5Desc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/hedvig_letters_sans"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:text="@string/test_it_out_clap_your_hands"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11ssp" />

@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30sdp"
         android:gravity="center"
-        android:text="@string/we_try_our_best_to_improve_user_experience_please_rate_our_app_and_appreciate_us"
+        android:text="@string/we_try_our_best"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="@dimen/_14ssp"
