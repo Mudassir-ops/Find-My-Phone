@@ -74,7 +74,27 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
                         else -> 800L
                     }
                     sessionManager.setFlashlightThreshold(flashlightDuration)
-                    sessionManager.setVolumeLevel(progress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+
+
+            seekBarVolume.max = 2
+            seekBarVolume.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    val soundSensitivity = when (progress) {
+                        0 -> 0   // Low
+                        1 -> 1   // Medium
+                        2 -> 2  // High
+                        else -> 1
+                    }
+                    sessionManager.setSoundSensitivityLevel(soundSensitivity)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -85,6 +105,7 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
 
     private fun onResumeDefaultValues() {
         binding?.apply {
+            switchFlashlight.isChecked = sessionManager.isFlashlightOn() == true
             seekBarFlash.max = 3
             val threshold = sessionManager.getFlashlightThreshold()
             val progress = when (threshold) {
@@ -95,7 +116,7 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
                 else -> 1
             }
             seekBarFlash.progress = progress
-
+            seekBarVolume.progress = sessionManager.getSoundSensitivityLevel() ?: 0
         }
     }
 

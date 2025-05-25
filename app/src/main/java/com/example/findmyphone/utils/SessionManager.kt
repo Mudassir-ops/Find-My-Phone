@@ -2,11 +2,13 @@ package com.example.findmyphone.utils
 
 import android.content.SharedPreferences
 import com.example.findmyphone.R
+import com.example.findmyphone.utils.AppConstants.CURRENT_APP_FOR_DETECTION
 import com.example.findmyphone.utils.AppConstants.DEACTIVATION_TIME
 import com.example.findmyphone.utils.AppConstants.DETECTION_MODE
 import com.example.findmyphone.utils.AppConstants.FLASH_LIGHT_THRESHOLD
 import com.example.findmyphone.utils.AppConstants.IS_FLASH_LIGHT_ON
 import com.example.findmyphone.utils.AppConstants.MY_RINGTONE
+import com.example.findmyphone.utils.AppConstants.SOUND_SENSITIVITY_LEVEL
 import com.example.findmyphone.utils.AppConstants.VOLUME_LEVEL
 import javax.inject.Inject
 
@@ -18,6 +20,7 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
             is Int -> editor?.putInt(key, value)
             is Boolean -> editor?.putBoolean(key, value)
             is String -> editor?.putString(key, value)
+            is Long -> editor?.putLong(key, value)
             else -> throw IllegalArgumentException("Unsupported type")
         }
         editor?.apply()
@@ -28,6 +31,7 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
             is Int -> preferences?.getInt(key, defaultValue) as T
             is Boolean -> preferences?.getBoolean(key, defaultValue) as T
             is String -> preferences?.getString(key, defaultValue) as T
+            is Long -> preferences?.getLong(key, defaultValue) as T
             else -> throw IllegalArgumentException("Unsupported type")
         }
     }
@@ -92,7 +96,25 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
     }
 
     fun getVolumeLevel(): Int? {
-        return getPreference(VOLUME_LEVEL, 0)
+        return getPreference(VOLUME_LEVEL, 40)
+    }
+
+    // Volume  preference
+    fun setSoundSensitivityLevel(time: Int) {
+        setPreference(SOUND_SENSITIVITY_LEVEL, time)
+    }
+
+    fun getSoundSensitivityLevel(): Int? {
+        return getPreference(SOUND_SENSITIVITY_LEVEL, 0)
+    }
+
+    //--Current App For Clap Detection
+    fun setCurrentAppForClapDetection(appName: String) {
+        setPreference(CURRENT_APP_FOR_DETECTION, appName)
+    }
+
+    fun getCurrentAppForClapDetection(): String? {
+        return getPreference(CURRENT_APP_FOR_DETECTION, "com.example.findmyphone")
     }
 
 }

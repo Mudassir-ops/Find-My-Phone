@@ -1,11 +1,17 @@
 package com.example.findmyphone.presentation.fragments.home
 
+import android.app.Activity
+import android.app.AppOpsManager
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -114,7 +120,7 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
                 if (isServiceEnabled) {
                     stopService()
                 } else {
-                    startService()
+                    requestUsageStatsPermission()
                 }
             }
             headerLayout.ivSettings.setOnClickListener {
@@ -207,8 +213,42 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
         super.onResume()
         onResumeDefaultValues()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         mediaPlayerManager?.stop()
+    }
+
+    private fun requestUsageStatsPermission() {
+        if (!isUsageStatsPermissionGranted()) {
+            val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+            requestUsageStatsPermission.launch(intent)
+        } else {
+            startService()
+        }
+    }
+
+    private fun isUsageStatsPermissionGranted(): Boolean {
+        val appOps = context?.getSystemService(AppOpsManager::class.java)
+        val mode = context?.packageName?.let {
+            appOps?.checkOpNoThrow(
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),
+                it
+            )
+        }
+        return mode == AppOpsManager.MODE_ALLOWED
+    }
+
+    private val requestUsageStatsPermission = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            startService()
+            Log.d("UsageStats", "Permission granted")
+        } else {
+            // Permission not granted, inform the user
+            Log.d("UsageStats", "Permission not granted")
+        }
     }
 }

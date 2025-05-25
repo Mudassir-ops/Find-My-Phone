@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FindMyPhone</string>
+    <string name="app_name">Find My Phone</string>
     <string name="find_my_phone">Find My Phone</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
