@@ -18,6 +18,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieDrawable
 import com.example.findmyphone.R
 import com.example.findmyphone.data.core.DetectionServiceForeground
@@ -118,9 +119,15 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
             }
             btnActivate.setOnClickListener {
                 if (isServiceEnabled) {
-                    stopService()
+                    val result = stopService()
+                    if (result) {
+                        navigateToActivationDeactivationScreen()
+                    }
                 } else {
-                    requestUsageStatsPermission()
+                    val result = startService()
+                    if (result) {
+                        navigateToActivationDeactivationScreen()
+                    }
                 }
             }
             headerLayout.ivSettings.setOnClickListener {
@@ -159,23 +166,38 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
 
     }
 
-    private fun startService() {
-        try {
+    private fun startService(): Boolean {
+        return try {
             viewModel.isServiceRunning(isServiceRunning = true)
             ContextCompat.startForegroundService(
-                context ?: return, Intent(context ?: return, DetectionServiceForeground::class.java)
+                context ?: return false,
+                Intent(context ?: return false, DetectionServiceForeground::class.java)
             )
+            true
         } catch (e: Exception) {
             e.printStackTrace()
+            false
         }
     }
 
-    private fun stopService() {
-        try {
+    private fun stopService(): Boolean {
+        return try {
+            val navController = findNavController()
+            val currentDestId = navController.currentDestination?.id
+            if (currentDestId == R.id.navigation_home_fragment) {
+                navController.navigate(R.id.action_navigation_home_fragment_to_navigation_activation_deactivation_screen)
+            }
             viewModel.isServiceRunning(isServiceRunning = false)
-            context?.stopService(Intent(context ?: return, DetectionServiceForeground::class.java))
+            context?.stopService(
+                Intent(
+                    context ?: return false,
+                    DetectionServiceForeground::class.java
+                )
+            )
+            true
         } catch (e: Exception) {
             e.printStackTrace()
+            false
         }
     }
 
@@ -244,11 +266,23 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            startService()
+            val resultService = startService()
+            if (resultService) {
+                navigateToActivationDeactivationScreen()
+            }
             Log.d("UsageStats", "Permission granted")
         } else {
             // Permission not granted, inform the user
             Log.d("UsageStats", "Permission not granted")
         }
     }
+
+    private fun navigateToActivationDeactivationScreen() {
+        val navController = findNavController()
+        val currentDestId = navController.currentDestination?.id
+        if (currentDestId == R.id.navigation_home_fragment) {
+            navController.navigate(R.id.action_navigation_home_fragment_to_navigation_activation_deactivation_screen)
+        }
+    }
+
 }

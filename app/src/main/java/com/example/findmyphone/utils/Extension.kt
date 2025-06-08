@@ -1,6 +1,7 @@
 package com.example.findmyphone.utils
 
 import android.app.Activity
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -18,6 +19,9 @@ import com.example.findmyphone.presentation.fragments.settings.SettingsFindMyPho
 import com.example.findmyphone.utils.all_extension.toast
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.dialogs.RateUsDialog
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -150,5 +154,33 @@ fun HomeFragmentFindMyPhone.showExitDialog(
     }
     if (exitDialog?.isAdded != true) {
         exitDialog?.show(fragmentManager, "ExitDialog")
+    }
+}
+
+fun Context.showTimePicker(
+    hour: Int = 12,
+    minute: Int = 0,
+    is24HourView: Boolean = true,
+    onTimeSelected: (hour: Int, minute: Int) -> Unit
+) {
+    val timePicker = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
+        onTimeSelected(selectedHour, selectedMinute)
+    }, hour, minute, is24HourView)
+    timePicker.show()
+}
+
+fun isCurrentTimeInRange(startTimeStr: String, endTimeStr: String): Boolean {
+    val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+    val now = Calendar.getInstance()
+    val currentTime = timeFormatter.format(now.time)
+    val currentDate = timeFormatter.parse(currentTime)
+    val startDate = timeFormatter.parse(startTimeStr)
+    val endDate = timeFormatter.parse(endTimeStr)
+    if (startDate == null || endDate == null || currentDate == null) return false
+
+    return if (startDate.before(endDate)) {
+        currentDate.after(startDate) && currentDate.before(endDate)
+    } else {
+        currentDate.after(startDate) || currentDate.before(endDate)
     }
 }

@@ -5,10 +5,13 @@ import com.example.findmyphone.R
 import com.example.findmyphone.utils.AppConstants.CURRENT_APP_FOR_DETECTION
 import com.example.findmyphone.utils.AppConstants.DEACTIVATION_TIME
 import com.example.findmyphone.utils.AppConstants.DETECTION_MODE
+import com.example.findmyphone.utils.AppConstants.END_TIME
 import com.example.findmyphone.utils.AppConstants.FLASH_LIGHT_THRESHOLD
 import com.example.findmyphone.utils.AppConstants.IS_FLASH_LIGHT_ON
 import com.example.findmyphone.utils.AppConstants.MY_RINGTONE
+import com.example.findmyphone.utils.AppConstants.ON_BOARDING_DONE
 import com.example.findmyphone.utils.AppConstants.SOUND_SENSITIVITY_LEVEL
+import com.example.findmyphone.utils.AppConstants.START_TIME
 import com.example.findmyphone.utils.AppConstants.VOLUME_LEVEL
 import javax.inject.Inject
 
@@ -64,12 +67,12 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
     }
 
     // Detection mode preference
-    fun setDetectionMode(mode: String) {
+    fun setDeactivationMode(mode: Boolean) {
         setPreference(DETECTION_MODE, mode)
     }
 
-    fun getDetectionMode(): String? {
-        return getPreference(DETECTION_MODE, "")
+    fun getDeactivationMode(): Boolean? {
+        return getPreference(DETECTION_MODE, false)
     }
 
     // Flashlight threshold preference
@@ -115,6 +118,35 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
 
     fun getCurrentAppForClapDetection(): String? {
         return getPreference(CURRENT_APP_FOR_DETECTION, "com.example.findmyphone")
+    }
+
+    //--Set OnBoarding Done
+    fun setOnBoardingDone(onBoardingDone: Boolean) {
+        setPreference(ON_BOARDING_DONE, onBoardingDone)
+    }
+
+    fun getOnBoardingDone(): Boolean? {
+        return getPreference(ON_BOARDING_DONE, false)
+    }
+
+
+    //--Set OnBoarding Done
+    fun setStartTime(startTime: String) {
+        setPreference(START_TIME, startTime)
+    }
+
+    fun getStartTime(): String? {
+        return getPreference(START_TIME, "")
+    }
+
+
+    //--Set OnBoarding Done
+    fun setEndTime(endTime: String) {
+        setPreference(END_TIME, endTime)
+    }
+
+    fun getEndTime(): String? {
+        return getPreference(END_TIME, "")
     }
 
 }

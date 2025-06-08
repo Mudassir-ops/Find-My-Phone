@@ -14,6 +14,7 @@ import com.example.findmyphone.data.other.DetectionRepository
 import com.example.findmyphone.data.other.NotificationRepository
 import com.example.findmyphone.utils.Logs
 import com.example.findmyphone.utils.SessionManager
+import com.example.findmyphone.utils.isCurrentTimeInRange
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 import java.util.Timer
@@ -109,6 +110,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
     }
 
     override fun onWhistleDetected() {
+        if (onDeactivation()) return
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastWhistleTime < whistleCooldown) {
             Logs.createLog("onWhistleIgnored: within cooldown$lastWhistleTime")
@@ -120,6 +122,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
     }
 
     override fun onClapDetected() {
+        if (onDeactivation()) return
         Log.d("onClapDetected", "onClapDetected: ")
         detectionRepository.onClapDetected(context = this)
     }
@@ -158,6 +161,17 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
 
     private fun stopTimer() {
         timer?.cancel()
+    }
+
+    private fun onDeactivation(): Boolean {
+        val isDeActivationTurnedOn = sessionManager.getDeactivationMode()
+        val deactivationStartTime = sessionManager.getStartTime()
+        val deactivationEndTime = sessionManager.getEndTime()
+        val isCurrentTimeInRange =
+            isCurrentTimeInRange(deactivationStartTime ?: "00:00", deactivationEndTime ?: "00:00")
+        Logs.createLog("deactivationEndTime--$isDeActivationTurnedOn--$isCurrentTimeInRange")
+        Logs.createLog("deactivationEndTime--$deactivationStartTime--$deactivationEndTime")
+        return isDeActivationTurnedOn == true && isCurrentTimeInRange
     }
 
 }

@@ -17,5 +17,8 @@ object AppConstants {
     const val VOLUME_LEVEL = "volume_level"
     const val SOUND_SENSITIVITY_LEVEL = "sound_sensitivity_level"
     const val CURRENT_APP_FOR_DETECTION = "current_App_For_Detection"
+    const val ON_BOARDING_DONE = "on_boarding_done"
+    const val START_TIME = "start_time"
+    const val END_TIME = "end_time"
 
 }

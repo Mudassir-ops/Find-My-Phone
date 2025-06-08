@@ -11,15 +11,20 @@ import com.example.findmyphone.R
 import com.example.findmyphone.databinding.FragmentOnGoingParentBinding
 import com.example.findmyphone.domain.OnGoingScreenModel
 import com.example.findmyphone.utils.AppConstants.ON_GOING_DATA_MODEL
+import com.example.findmyphone.utils.SessionManager
 import com.example.findmyphone.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class OnGoingParentFragment : Fragment(R.layout.fragment_on_going_parent) {
 
     private val binding by viewBinding(FragmentOnGoingParentBinding::bind)
     private var pagerAdapterRef: WeakReference<OnGoingPagerAdapter>? = null
+
+    @Inject
+    lateinit var sessionManager: SessionManager
     private val onGoingPagesList: Array<OnGoingScreenModel> by lazy {
         arrayOf(
             OnGoingScreenModel(
@@ -65,7 +70,8 @@ class OnGoingParentFragment : Fragment(R.layout.fragment_on_going_parent) {
     private fun clickListeners() {
         binding?.apply {
             btnContinue.setupNextButton(
-                viewPager, pagerAdapterRef?.get() ?: return, findNavController()
+                viewPager, pagerAdapterRef?.get() ?: return, findNavController(),
+                sessionManager = sessionManager
             )
         }
     }
