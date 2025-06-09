@@ -1,6 +1,7 @@
 package com.example.findmyphone.presentation.fragments.settings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import com.example.findmyphone.databinding.FragmentSettingsFindMyPhoneBinding
 import com.example.findmyphone.utils.SessionManager
 import com.example.findmyphone.utils.dialogs.RateUsDialog
 import com.example.findmyphone.utils.showRateDialog
+import com.example.findmyphone.utils.showTimePicker
 import com.example.findmyphone.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -39,6 +41,30 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
                 btnBack.setOnClickListener {
                     findNavController().navigateUp()
                 }
+                viewStartPicker.setOnClickListener {
+                    context?.showTimePicker(
+                        hour = 10,
+                        minute = 30,
+                        is24HourView = false
+                    ) { selectedHour, selectedMinute ->
+                        tvStartPicker.text =
+                            getString(R.string.start_time, selectedHour, selectedMinute)
+                        sessionManager.setStartTime(startTime = "$selectedHour:$selectedMinute")
+                        Log.d("TimePicker", "Selected time: $selectedHour:$selectedMinute")
+                    }
+                }
+                viewEndPicker.setOnClickListener {
+                    context?.showTimePicker(
+                        hour = 10,
+                        minute = 30,
+                        is24HourView = false
+                    ) { selectedHour, selectedMinute ->
+                        tvEndPicker.text =
+                            getString(R.string.end_time, selectedHour, selectedMinute)
+                        sessionManager.setEndTime(endTime = "$selectedHour:$selectedMinute")
+                        Log.d("TimePicker", "Selected time: $selectedHour:$selectedMinute")
+                    }
+                }
             }
             layoutRateApp.setOnClickListener {
                 this@SettingsFindMyPhoneFragment.showRateDialog(fragmentManager = childFragmentManager)
@@ -59,22 +85,47 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
                     sessionManager.setFlashlightState(false)
                 }
             }
+            switchScheduleDeactivation.setOnClickListener {
+                val isOn = switchScheduleDeactivation.isChecked
+                if (isOn) {
+                    sessionManager.setDeactivationMode(true)
+                } else {
+                    sessionManager.setDeactivationMode(false)
+                }
+            }
+
             seekBarFlash.max = 3
             seekBarFlash.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
+                    seekBar: SeekBar?, progress: Int, fromUser: Boolean
                 ) {
                     val flashlightDuration = when (progress) {
-                        0 -> 400L   // Very short
-                        1 -> 800L   // Short
-                        2 -> 1000L  // Long
-                        3 -> 1200L  // Very long
-                        else -> 800L
+                        0 -> 200L   // Very short
+                        1 -> 300L   // Short
+                        2 -> 800L  // Long
+                        3 -> 1600L  // Very long
+                        else -> 400L
                     }
                     sessionManager.setFlashlightThreshold(flashlightDuration)
-                    sessionManager.setVolumeLevel(progress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+
+
+            seekBarVolume.max = 2
+            seekBarVolume.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?, progress: Int, fromUser: Boolean
+                ) {
+                    val soundSensitivity = when (progress) {
+                        0 -> 0   // Low
+                        1 -> 1   // Medium
+                        2 -> 2  // High
+                        else -> 1
+                    }
+                    sessionManager.setSoundSensitivityLevel(soundSensitivity)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -85,6 +136,7 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
 
     private fun onResumeDefaultValues() {
         binding?.apply {
+            switchFlashlight.isChecked = sessionManager.isFlashlightOn() == true
             seekBarFlash.max = 3
             val threshold = sessionManager.getFlashlightThreshold()
             val progress = when (threshold) {
@@ -95,7 +147,10 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
                 else -> 1
             }
             seekBarFlash.progress = progress
-
+            seekBarVolume.progress = sessionManager.getSoundSensitivityLevel() ?: 0
+            switchScheduleDeactivation.isChecked = sessionManager.getDeactivationMode() == true
+            tvStartPicker.text=sessionManager.getStartTime()
+            tvEndPicker.text=sessionManager.getEndTime()
         }
     }
 

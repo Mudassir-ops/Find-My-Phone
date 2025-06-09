@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_navigation_home_fragment_to_navigation_settings"
             app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/action_navigation_home_fragment_to_navigation_activation_deactivation_screen"
+            app:destination="@id/navigation_activation_deactivation_screen" />
     </fragment>
 
     <fragment
@@ -64,5 +67,11 @@
         android:name="com.example.findmyphone.presentation.fragments.howtouse.HowToUseFragment"
         android:label="How To Use Fragment"
         tools:layout="@layout/fragment_how_to_use" />
+
+    <fragment
+        android:id="@+id/navigation_activation_deactivation_screen"
+        android:name="com.example.findmyphone.presentation.fragments.activatioDeactivationScreen.ActivationDeactivationFragment"
+        android:label="Activation Deactivation Screen"
+        tools:layout="@layout/fragment_activation_deactivation" />
 
 </navigation>
