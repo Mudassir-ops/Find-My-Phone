@@ -5,6 +5,7 @@ import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -30,6 +31,7 @@ import com.example.findmyphone.utils.MediaPlayerManager
 import com.example.findmyphone.utils.SessionManager
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.showExitDialog
+import com.example.findmyphone.utils.showOverlay
 import com.example.findmyphone.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -169,16 +171,22 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
     private fun startService(): Boolean {
         return try {
             viewModel.isServiceRunning(isServiceRunning = true)
-            ContextCompat.startForegroundService(
-                context ?: return false,
-                Intent(context ?: return false, DetectionServiceForeground::class.java)
-            )
+            val ctx = context ?: return false
+            val serviceIntent = Intent(ctx, DetectionServiceForeground::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                showOverlay(ctx) {
+                    ContextCompat.startForegroundService(ctx, serviceIntent)
+                }
+            } else {
+                ContextCompat.startForegroundService(ctx, serviceIntent)
+            }
             true
         } catch (e: Exception) {
             e.printStackTrace()
             false
         }
     }
+
 
     private fun stopService(): Boolean {
         return try {

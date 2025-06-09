@@ -136,7 +136,7 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
     }
 
     fun getStartTime(): String? {
-        return getPreference(START_TIME, "")
+        return getPreference(START_TIME, "12:00")
     }
 
 
@@ -146,7 +146,7 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
     }
 
     fun getEndTime(): String? {
-        return getPreference(END_TIME, "")
+        return getPreference(END_TIME, "12:30")
     }
 
 }

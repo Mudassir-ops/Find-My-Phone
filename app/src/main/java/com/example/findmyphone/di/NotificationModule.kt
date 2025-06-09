@@ -59,11 +59,13 @@ object NotificationModule {
         )
 
         return NotificationCompat.Builder(context, PARENTAL_LOCK_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground).setAutoCancel(true)
+            .setSmallIcon(R.drawable.find_my_phone_app_icon_notification).setAutoCancel(false)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .setContentIntent(pendingDefaultIntent)
-            .setSound(null)
+            .setContentTitle("Find MyPhone")
+            .setContentText("Find MyPhone service is active")
+            .setSound(null).setOngoing(true)
     }
 
     /** Notification repository provider*/

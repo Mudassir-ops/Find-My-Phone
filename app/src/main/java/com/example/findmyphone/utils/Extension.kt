@@ -6,12 +6,20 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.Parcelable
+import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.FragmentManager
 import com.example.findmyphone.R
 import com.example.findmyphone.presentation.fragments.home.HomeFragmentFindMyPhone
@@ -184,3 +192,44 @@ fun isCurrentTimeInRange(startTimeStr: String, endTimeStr: String): Boolean {
         currentDate.after(startDate) || currentDate.before(endDate)
     }
 }
+
+fun showOverlay(context: Context, onShown: () -> Unit) {
+    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val params = WindowManager.LayoutParams(
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        if (SDK_INT >= Build.VERSION_CODES.O)
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        else
+            WindowManager.LayoutParams.TYPE_PHONE,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+        PixelFormat.TRANSLUCENT
+    )
+    params.gravity = Gravity.TOP or Gravity.START
+
+    val overlayView = View(context).apply {
+        setBackgroundColor(Color.TRANSPARENT)
+        layoutParams = ViewGroup.LayoutParams(1, 1)
+        visibility = View.VISIBLE
+        post {
+            onShown()
+        }
+    }
+
+    try {
+        windowManager.addView(overlayView, params)
+    } catch (e: Exception) {
+        Log.e("Overlay", "Overlay add failed: ${e.message}")
+        onShown()
+    }
+    Handler(Looper.getMainLooper()).postDelayed({
+        try {
+            windowManager.removeView(overlayView)
+        } catch (e: Exception) {
+            Log.e("Overlay", "Overlay remove failed: ${e.message}")
+        }
+    }, 2000)
+}
+
