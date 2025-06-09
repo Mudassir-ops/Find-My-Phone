@@ -100,11 +100,11 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
                     seekBar: SeekBar?, progress: Int, fromUser: Boolean
                 ) {
                     val flashlightDuration = when (progress) {
-                        0 -> 400L   // Very short
-                        1 -> 800L   // Short
-                        2 -> 1000L  // Long
-                        3 -> 1200L  // Very long
-                        else -> 800L
+                        0 -> 200L   // Very short
+                        1 -> 300L   // Short
+                        2 -> 800L  // Long
+                        3 -> 1600L  // Very long
+                        else -> 400L
                     }
                     sessionManager.setFlashlightThreshold(flashlightDuration)
                 }
