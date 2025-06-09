@@ -1,11 +1,18 @@
 package com.example.findmyphone.utils
 
 import android.content.SharedPreferences
+import com.example.findmyphone.R
+import com.example.findmyphone.utils.AppConstants.CURRENT_APP_FOR_DETECTION
 import com.example.findmyphone.utils.AppConstants.DEACTIVATION_TIME
 import com.example.findmyphone.utils.AppConstants.DETECTION_MODE
+import com.example.findmyphone.utils.AppConstants.END_TIME
 import com.example.findmyphone.utils.AppConstants.FLASH_LIGHT_THRESHOLD
 import com.example.findmyphone.utils.AppConstants.IS_FLASH_LIGHT_ON
 import com.example.findmyphone.utils.AppConstants.MY_RINGTONE
+import com.example.findmyphone.utils.AppConstants.ON_BOARDING_DONE
+import com.example.findmyphone.utils.AppConstants.SOUND_SENSITIVITY_LEVEL
+import com.example.findmyphone.utils.AppConstants.START_TIME
+import com.example.findmyphone.utils.AppConstants.VOLUME_LEVEL
 import javax.inject.Inject
 
 class SessionManager @Inject constructor(private val preferences: SharedPreferences?) {
@@ -16,6 +23,7 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
             is Int -> editor?.putInt(key, value)
             is Boolean -> editor?.putBoolean(key, value)
             is String -> editor?.putString(key, value)
+            is Long -> editor?.putLong(key, value)
             else -> throw IllegalArgumentException("Unsupported type")
         }
         editor?.apply()
@@ -26,6 +34,7 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
             is Int -> preferences?.getInt(key, defaultValue) as T
             is Boolean -> preferences?.getBoolean(key, defaultValue) as T
             is String -> preferences?.getString(key, defaultValue) as T
+            is Long -> preferences?.getLong(key, defaultValue) as T
             else -> throw IllegalArgumentException("Unsupported type")
         }
     }
@@ -40,12 +49,12 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
 
 
     // Ringtone preference
-    fun setRingtone(ringtone: String) {
+    fun setRingtone(ringtone: Int) {
         setPreference(MY_RINGTONE, ringtone)
     }
 
-    fun getRingtone(): String? {
-        return getPreference(MY_RINGTONE, "")
+    fun getRingtone(): Int? {
+        return getPreference(MY_RINGTONE, R.raw.door_bell)
     }
 
     // Flashlight state preference
@@ -58,21 +67,21 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
     }
 
     // Detection mode preference
-    fun setDetectionMode(mode: String) {
+    fun setDeactivationMode(mode: Boolean) {
         setPreference(DETECTION_MODE, mode)
     }
 
-    fun getDetectionMode(): String? {
-        return getPreference(DETECTION_MODE, "")
+    fun getDeactivationMode(): Boolean? {
+        return getPreference(DETECTION_MODE, false)
     }
 
     // Flashlight threshold preference
-    fun setFlashlightThreshold(threshold: Int) {
+    fun setFlashlightThreshold(threshold: Long) {
         setPreference(FLASH_LIGHT_THRESHOLD, threshold)
     }
 
-    fun getFlashlightThreshold(): Int? {
-        return getPreference(FLASH_LIGHT_THRESHOLD, 0)
+    fun getFlashlightThreshold(): Long? {
+        return getPreference(FLASH_LIGHT_THRESHOLD, 400L)
     }
 
     // Deactivation time preference
@@ -82,6 +91,62 @@ class SessionManager @Inject constructor(private val preferences: SharedPreferen
 
     fun getDeactivationTime(): Long? {
         return getPreference(DEACTIVATION_TIME, 0L)
+    }
+
+    // Volume  preference
+    fun setVolumeLevel(time: Int) {
+        setPreference(VOLUME_LEVEL, time)
+    }
+
+    fun getVolumeLevel(): Int? {
+        return getPreference(VOLUME_LEVEL, 40)
+    }
+
+    // Volume  preference
+    fun setSoundSensitivityLevel(time: Int) {
+        setPreference(SOUND_SENSITIVITY_LEVEL, time)
+    }
+
+    fun getSoundSensitivityLevel(): Int? {
+        return getPreference(SOUND_SENSITIVITY_LEVEL, 0)
+    }
+
+    //--Current App For Clap Detection
+    fun setCurrentAppForClapDetection(appName: String) {
+        setPreference(CURRENT_APP_FOR_DETECTION, appName)
+    }
+
+    fun getCurrentAppForClapDetection(): String? {
+        return getPreference(CURRENT_APP_FOR_DETECTION, "com.example.findmyphone")
+    }
+
+    //--Set OnBoarding Done
+    fun setOnBoardingDone(onBoardingDone: Boolean) {
+        setPreference(ON_BOARDING_DONE, onBoardingDone)
+    }
+
+    fun getOnBoardingDone(): Boolean? {
+        return getPreference(ON_BOARDING_DONE, false)
+    }
+
+
+    //--Set OnBoarding Done
+    fun setStartTime(startTime: String) {
+        setPreference(START_TIME, startTime)
+    }
+
+    fun getStartTime(): String? {
+        return getPreference(START_TIME, "12:00")
+    }
+
+
+    //--Set OnBoarding Done
+    fun setEndTime(endTime: String) {
+        setPreference(END_TIME, endTime)
+    }
+
+    fun getEndTime(): String? {
+        return getPreference(END_TIME, "12:30")
     }
 
 }

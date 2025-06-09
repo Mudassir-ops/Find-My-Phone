@@ -5,13 +5,14 @@ import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import com.example.findmyphone.data.other.DetectionRepository
 import com.example.findmyphone.utils.Logs
+import com.example.findmyphone.utils.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -22,17 +23,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
+import javax.inject.Inject
 
-class DetectionRepositoryImpl : DetectionRepository {
+
+class DetectionRepositoryImpl @Inject constructor(private val sessionManager: SessionManager) :
+    DetectionRepository {
 
     private val _isServiceRunningStateFlow = MutableStateFlow(false)
     override val isServiceRunningStateFlow: StateFlow<Boolean> =
         _isServiceRunningStateFlow.asStateFlow()
 
-
-    private val flashDelay = 1200L
     private val vibrationDuration = 900L
-    private val clapThreshold = 500L
+    private val clapThreshold = 1000L
 
     private var lastClapTime = 0L
     private var isDoubleClap = false
@@ -45,6 +47,7 @@ class DetectionRepositoryImpl : DetectionRepository {
     private var mediaPlayer: MediaPlayer? = null
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+
 
     override fun onWhistleDetected(context: Context) {
         handleWhistleDetectionLogic(context)
@@ -64,20 +67,24 @@ class DetectionRepositoryImpl : DetectionRepository {
         val timeSinceLastClap = currentTime - lastClapTime
         lastClapTime = currentTime
         isDoubleClap = timeSinceLastClap <= clapThreshold
-        if (isDoubleClap) {
+        val currentVisibleApp = sessionManager.getCurrentAppForClapDetection()
+        Logs.createLog("isDoubleClap---$isDoubleClap--$currentVisibleApp")
+        if (isDoubleClap && (currentVisibleApp == (context.packageName ?: ""))) {
             playRingtone(context)
             vibrateDevice(context)
-            flashSequence(context)
+            if (sessionManager.isFlashlightOn() == true) {
+                flashSequence(context)
+            }
         }
     }
 
     private fun handleWhistleDetectionLogic(context: Context) {
-        if (isWhistleProcessing) return
-        isWhistleProcessing = true
         Logs.createLog("handleWhistleDetectionLogic---> triggered")
         playRingtone(context)
         vibrateDevice(context)
-        flashSequence(context)
+        if (sessionManager.isFlashlightOn() == true) {
+            flashSequence(context)
+        }
         scope.launch {
             delay(5000)
             isWhistleProcessing = false
@@ -92,11 +99,15 @@ class DetectionRepositoryImpl : DetectionRepository {
             reset()
             release()
         }
-
-        val ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+        val selectedRingtone = sessionManager.getRingtone()
+        val scaledVolume = when (val volumeLevel = sessionManager.getVolumeLevel()) {
+            in 0..100 -> (volumeLevel?.toFloat() ?: 20F) / 100f
+            else -> 0.5f
+        }
+        val uri = Uri.parse("android.resource://${context.packageName}/$selectedRingtone")
         mediaPlayer = MediaPlayer().apply {
             try {
-                setDataSource(context, ringtoneUri)
+                setDataSource(context, uri)
                 setAudioStreamType(AudioManager.STREAM_RING)
                 setOnCompletionListener {
                     stop()
@@ -105,6 +116,7 @@ class DetectionRepositoryImpl : DetectionRepository {
                     mediaPlayer = null
                 }
                 prepare()
+                setVolume(scaledVolume, scaledVolume)
                 start()
                 scope.launch {
                     delay(5000)
@@ -123,6 +135,7 @@ class DetectionRepositoryImpl : DetectionRepository {
             }
         }
     }
+
 
     private fun vibrateDevice(context: Context) {
         if (isVibrating) return
@@ -165,9 +178,9 @@ class DetectionRepositoryImpl : DetectionRepository {
         scope.launch(Dispatchers.IO) {
             repeat(3) {
                 toggleFlashLight(true)
-                delay(flashDelay)
+                delay(sessionManager.getFlashlightThreshold() ?: 400L)
                 toggleFlashLight(false)
-                delay(flashDelay)
+                delay(sessionManager.getFlashlightThreshold() ?: 400L)
             }
         }
     }

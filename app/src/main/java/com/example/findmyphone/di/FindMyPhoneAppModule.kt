@@ -19,8 +19,10 @@ object FindMyPhoneAppModule {
 
     @Provides
     @Singleton
-    fun provideDetectionRepository(): DetectionRepository {
-        return DetectionRepositoryImpl()
+    fun provideDetectionRepository(
+        sessionManager: SessionManager
+    ): DetectionRepository {
+        return DetectionRepositoryImpl(sessionManager = sessionManager)
     }
 
     @Singleton

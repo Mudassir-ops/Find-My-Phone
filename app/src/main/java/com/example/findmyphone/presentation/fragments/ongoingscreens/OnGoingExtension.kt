@@ -5,13 +5,15 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.navigation.NavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.findmyphone.R
+import com.example.findmyphone.utils.SessionManager
 import com.google.android.material.button.MaterialButton
 
 
 fun MaterialButton.setupNextButton(
     viewPager: ViewPager2,
     pagerAdapter: OnGoingParentFragment.OnGoingPagerAdapter,
-    navController: NavController
+    navController: NavController,
+    sessionManager: SessionManager
 ) {
     setOnClickListener {
         val currentItem = viewPager.currentItem
@@ -23,6 +25,7 @@ fun MaterialButton.setupNextButton(
 
             currentItem == lastItemIndex -> {
                 if (navController.currentDestination?.id == R.id.navigation_ongoing_parent) {
+                    sessionManager.setOnBoardingDone(onBoardingDone = true)
                     navController.navigate(R.id.action_navigation_ongoing_parent_to_navigation_permission)
                 }
             }

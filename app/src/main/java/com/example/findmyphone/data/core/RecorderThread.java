@@ -9,6 +9,7 @@ public class RecorderThread extends Thread {
     byte[] buffer;
     private int channelConfiguration = 16;
     private int frameByteSize = 2048;
+    private boolean isRecording = false;
     private int sampleRate = 44100;
 
     @SuppressLint("MissingPermission")
@@ -24,9 +25,14 @@ public class RecorderThread extends Thread {
         return this.audioRecord;
     }
 
+    public boolean isRecording() {
+        return isAlive() && this.isRecording;
+    }
+
     public void startRecording() {
         try {
             this.audioRecord.startRecording();
+            this.isRecording = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,6 +42,7 @@ public class RecorderThread extends Thread {
         try {
             this.audioRecord.stop();
             this.audioRecord.release();
+            this.isRecording = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,7 +59,7 @@ public class RecorderThread extends Thread {
                 break;
             }
             byte[] bArr = this.buffer;
-            i3 += Math.abs((short) ((bArr[i2 + 1] << 8) | bArr[i2]));
+            i3 += Math.abs((int) ((short) ((bArr[i2 + 1] << 8) | bArr[i2])));
             i2 += 2;
         }
         if (((float) ((i3 / i) / 2)) < 30.0f) {

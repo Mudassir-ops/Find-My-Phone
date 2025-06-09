@@ -1,16 +1,25 @@
 package com.example.findmyphone.utils
 
 import android.app.Activity
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.Parcelable
+import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.FragmentManager
 import com.example.findmyphone.R
 import com.example.findmyphone.presentation.fragments.home.HomeFragmentFindMyPhone
@@ -18,6 +27,9 @@ import com.example.findmyphone.presentation.fragments.settings.SettingsFindMyPho
 import com.example.findmyphone.utils.all_extension.toast
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.dialogs.RateUsDialog
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -152,3 +164,72 @@ fun HomeFragmentFindMyPhone.showExitDialog(
         exitDialog?.show(fragmentManager, "ExitDialog")
     }
 }
+
+fun Context.showTimePicker(
+    hour: Int = 12,
+    minute: Int = 0,
+    is24HourView: Boolean = true,
+    onTimeSelected: (hour: Int, minute: Int) -> Unit
+) {
+    val timePicker = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
+        onTimeSelected(selectedHour, selectedMinute)
+    }, hour, minute, is24HourView)
+    timePicker.show()
+}
+
+fun isCurrentTimeInRange(startTimeStr: String, endTimeStr: String): Boolean {
+    val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+    val now = Calendar.getInstance()
+    val currentTime = timeFormatter.format(now.time)
+    val currentDate = timeFormatter.parse(currentTime)
+    val startDate = timeFormatter.parse(startTimeStr)
+    val endDate = timeFormatter.parse(endTimeStr)
+    if (startDate == null || endDate == null || currentDate == null) return false
+
+    return if (startDate.before(endDate)) {
+        currentDate.after(startDate) && currentDate.before(endDate)
+    } else {
+        currentDate.after(startDate) || currentDate.before(endDate)
+    }
+}
+
+fun showOverlay(context: Context, onShown: () -> Unit) {
+    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val params = WindowManager.LayoutParams(
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        if (SDK_INT >= Build.VERSION_CODES.O)
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        else
+            WindowManager.LayoutParams.TYPE_PHONE,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+        PixelFormat.TRANSLUCENT
+    )
+    params.gravity = Gravity.TOP or Gravity.START
+
+    val overlayView = View(context).apply {
+        setBackgroundColor(Color.TRANSPARENT)
+        layoutParams = ViewGroup.LayoutParams(1, 1)
+        visibility = View.VISIBLE
+        post {
+            onShown()
+        }
+    }
+
+    try {
+        windowManager.addView(overlayView, params)
+    } catch (e: Exception) {
+        Log.e("Overlay", "Overlay add failed: ${e.message}")
+        onShown()
+    }
+    Handler(Looper.getMainLooper()).postDelayed({
+        try {
+            windowManager.removeView(overlayView)
+        } catch (e: Exception) {
+            Log.e("Overlay", "Overlay remove failed: ${e.message}")
+        }
+    }, 2000)
+}
+
