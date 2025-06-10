@@ -2,12 +2,15 @@ package com.example.findmyphone.data.core
 
 import android.annotation.SuppressLint
 import android.util.Log
+import com.chaquo.python.Python
 import com.example.findmyphone.TEST.musicg.api.ClapApi
 import com.example.findmyphone.TEST.musicg.api.WhistleApi
 import com.example.findmyphone.TEST.musicg.wave.WaveHeader
 import com.example.findmyphone.utils.Logs
 import com.example.findmyphone.utils.Logs.createLog
 import com.example.findmyphone.utils.SessionManager
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.util.LinkedList
 import kotlin.concurrent.Volatile
 
@@ -71,14 +74,33 @@ class DetectorThread(
         repeat(1) { clapResultList.add(false) }
     }
 
+    private fun convertPcmToFloat(pcmBytes: ByteArray): FloatArray {
+        val shortBuffer = ByteBuffer.wrap(pcmBytes).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer()
+        val audioSamples = ShortArray(shortBuffer.limit())
+        shortBuffer.get(audioSamples)
+        return audioSamples.map { it / 32768.0f }.toFloatArray()
+    }
+
     override fun run() {
         initBuffer()
         try {
             while (running) {
-
                 val frameBytes = recorder.frameBytes
                 val oldWhistle = whistleResultList.removeFirst()
                 val oldClap = clapResultList.removeFirst()
+                val isClapPython = frameBytes?.let { bytes ->
+                    val floatArray = convertPcmToFloat(bytes)
+                    val py = Python.getInstance()
+                    val detectClap =
+                        py.getModule("clap_detector")
+                    val result = detectClap.callAttr("detect_clap", floatArray)
+                    result?.toString()?.contains("Double Clap Detected") == true
+                }
+                createLog("isClapPython-->$isClapPython")
+                if (isClapPython == true) {
+                    initBuffer()
+                    onSignalsDetectedListener?.onClapDetected()
+                }
                 if (oldWhistle) numWhistles--
                 if (oldClap) numClaps--
                 val isWhistle = frameBytes?.let { whistleApi.isWhistle(it) } ?: false
@@ -93,8 +115,8 @@ class DetectorThread(
                 createLog("DetailOfAudio", "$numWhistles sands $numClaps")
                 if (numWhistles >= 3) {
                     Log.e("Sound", "Whistle Detected$numWhistles")
-                    initBuffer()
-                    onSignalsDetectedListener?.onWhistleDetected()
+//                    initBuffer()
+//                    onSignalsDetectedListener?.onWhistleDetected()
                 }
 
                 val clapNumber = numOfClapSensitivity.getSoundSensitivityLevel() ?: 0
@@ -105,10 +127,10 @@ class DetectorThread(
                     else -> 0
                 }
                 Log.d("ClapLogicNaju", "numClaps at onClapDetected $numClaps--$clapSensitivity")
-                if (numClaps >= clapSensitivity) {
-                    initBuffer()
-                    onSignalsDetectedListener?.onClapDetected()
-                }
+//                if (numClaps >= clapSensitivity) {
+//                    initBuffer()
+//                    onSignalsDetectedListener?.onClapDetected()
+//                }
 
             }
         } catch (e: Exception) {

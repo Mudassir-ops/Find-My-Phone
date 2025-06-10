@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.safe.args)
     id("kotlin-kapt")
     id("kotlin-parcelize")
-
+    id("com.chaquo.python")
 }
 
 android {
@@ -20,6 +20,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            // On Apple silicon, you can omit x86_64.
+            abiFilters += listOf("arm64-v8a", "x86_64")
+        }
     }
 
     buildTypes {
@@ -41,6 +45,14 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+    }
+}
+chaquopy {
+    defaultConfig {
+        version = "3.8"
+        pip {
+            install("numpy")
+        }
     }
 }
 
@@ -77,5 +89,5 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     kapt(libs.androidx.room.compiler.v250)
 
-  //  implementation(files("libs/musicg-1.4.2.0.jar"))
+    //  implementation(files("libs/musicg-1.4.2.0.jar"))
 }
