@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.findmyphone.R
-import com.example.findmyphone.databinding.FragmentHowToUseBinding
+import com.findmyphone.clapping.clapfinder.soundalert.R
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentHowToUseBinding
 import com.example.findmyphone.utils.viewBinding
 
 class HowToUseFragment : Fragment(R.layout.fragment_how_to_use) {

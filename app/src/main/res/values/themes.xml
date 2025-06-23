@@ -4,10 +4,24 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/app_primary_color</item>
+
+
+        <item name="android:windowSplashScreenAnimatedIcon" tools:ignore="NewApi">
+            @mipmap/ic_launcher
+        </item>
+        <!-- Background color -->
+        <item name="android:windowSplashScreenBackground" tools:ignore="NewApi">
+            @color/track_color
+        </item>
+        <!-- Optional: icon scale -->
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:ignore="NewApi">
+            @color/white
+        </item>
+
     </style>
 
-    <style name="Theme.FindMyPhone" parent="Base.Theme.FindMyPhone" />
 
+    <style name="Theme.FindMyPhone" parent="Base.Theme.FindMyPhone" />
 
 
 </resources>

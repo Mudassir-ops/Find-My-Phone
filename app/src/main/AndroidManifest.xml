@@ -22,15 +22,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission
-        android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission" />
 
     <application
-        android:name=".FindMyPhoneApplication"
+        android:name="com.example.findmyphone.FindMyPhoneApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -40,11 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindMyPhone"
         tools:targetApi="31">
+
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name="com.example.findmyphone.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,7 +50,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name=".data.core.DetectionServiceForeground"
+            android:name="com.example.findmyphone.data.core.ClapCounterService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="microphone" />

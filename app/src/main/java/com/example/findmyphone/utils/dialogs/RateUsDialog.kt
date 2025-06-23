@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
-import com.example.findmyphone.databinding.RateUsDialogBinding
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.RateUsDialogBinding
 import com.example.findmyphone.utils.feedBackWithEmail
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,7 +61,7 @@ class RateUsDialog(
                         context?.feedBackWithEmail(
                             title = "Feedback",
                             message = "Any Feedback",
-                            emailId = "Cisco7865@gmail.com"
+                            emailId = "atonomushub127@gmail.com"
                         )
                         dismiss()
                     }

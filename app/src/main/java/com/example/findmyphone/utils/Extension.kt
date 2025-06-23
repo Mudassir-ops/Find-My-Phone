@@ -1,13 +1,19 @@
 package com.example.findmyphone.utils
 
+import android.Manifest
 import android.app.Activity
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.graphics.drawable.Drawable
+import android.media.AudioFormat
+import android.media.AudioRecord
+import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
@@ -15,19 +21,27 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Parcelable
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
-import com.example.findmyphone.R
+import com.findmyphone.clapping.clapfinder.soundalert.R
 import com.example.findmyphone.presentation.fragments.home.HomeFragmentFindMyPhone
 import com.example.findmyphone.presentation.fragments.settings.SettingsFindMyPhoneFragment
 import com.example.findmyphone.utils.all_extension.toast
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.dialogs.RateUsDialog
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -66,7 +80,7 @@ fun Activity.moreApps() {
         this.startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=com.parental.control.displaytime.kids.safety")
+                Uri.parse("https://play.google.com/store/apps/details?id=")
             )
         )
     } catch (e: Exception) {
@@ -231,5 +245,77 @@ fun showOverlay(context: Context, onShown: () -> Unit) {
             Log.e("Overlay", "Overlay remove failed: ${e.message}")
         }
     }, 2000)
+}
+
+
+object Constant {
+    val screenWidth: Int = Resources.getSystem().displayMetrics.widthPixels
+
+    val screenHeight: Int = Resources.getSystem().displayMetrics.heightPixels
+}
+
+fun Context.compatColor(int: Int): Int {
+    return ContextCompat.getColor(this, int)
+}
+
+fun Context.compactDrawable(int: Int): Drawable? {
+    return ContextCompat.getDrawable(this, int)
+}
+
+object Converter {
+    fun dpFromPx(px: Int): Float {
+        return px / Resources.getSystem().displayMetrics.density
+    }
+
+    fun pixelsToSp(pixels: Int): Float {
+        val scaledDensity = Resources.getSystem().displayMetrics.scaledDensity
+        return pixels / scaledDensity
+    }
+
+    fun asPixels(value: Int): Int {
+        val scale = Resources.getSystem().displayMetrics.density
+        val dpAsPixels = (value * scale + 0.5f)
+        return dpAsPixels.toInt()
+    }
+}
+
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+    this.isEnabled = true
+}
+
+fun View.hidden() {
+    this.visibility = View.INVISIBLE
+    this.isEnabled = false
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
+    this.isEnabled = false
+}
+
+
+fun Context?.convertDpToPixel(dp: Float): Float {
+    this ?: return 0f
+    return dp * (resources
+        .displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun LocalDateTime.string(pattern: String = "yyyy-MM-dd HH:mm"): String {
+    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern(pattern)
+    return this.format(formatter)
+}
+
+fun Context?.hasPermissions(permissions: Array<String>): Boolean = permissions.all {
+    this ?: return@all false
+    ActivityCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+}
+
+fun View.asPixels(value: Int): Int {
+    val scale = resources.displayMetrics.density
+    val dpAsPixels = (value * scale + 0.5f)
+    return dpAsPixels.toInt()
 }
 

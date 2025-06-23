@@ -9,8 +9,8 @@ import dagger.hilt.android.HiltAndroidApp
 class FindMyPhoneApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
-        if (!Python.isStarted()) {
-            Python.start(AndroidPlatform(this))
-        }
+//        if (!Python.isStarted()) {
+//            Python.start(AndroidPlatform(this))
+//        }
     }
 }

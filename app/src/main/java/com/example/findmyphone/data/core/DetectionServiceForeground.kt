@@ -22,7 +22,7 @@ import java.util.TimerTask
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
+class DetectionServiceForeground1 : Service(), OnSignalsDetectedListener {
 
     private var detectorThread: DetectorThread? = null
     private var handlerThread: HandlerThread? = null
@@ -50,7 +50,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (Build.VERSION.SDK_INT >= 34) {
                 ServiceCompat.startForeground(
-                    this@DetectionServiceForeground,
+                    this@DetectionServiceForeground1,
                     1,
                     notification,
                     FOREGROUND_SERVICE_TYPE_MICROPHONE
@@ -77,7 +77,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
 
     override fun onStartCommand(intent: Intent, i: Int, i2: Int): Int {
         startDetection()
-        startTimer()
+        // startTimer()
         Log.d("DetectionService", "Service onStartCommand")
         return START_STICKY
     }
@@ -86,7 +86,7 @@ class DetectionServiceForeground : Service(), OnSignalsDetectedListener {
         val recorderThread2 = RecorderThread()
         this.recorderThread = recorderThread2
         recorderThread2.start()
-        val detectorThread2 = DetectorThread(this.recorderThread ?: return, sessionManager)
+        val detectorThread2 = DetectorThread(this.recorderThread ?: return, sessionManager, this)
         this.detectorThread = detectorThread2
         detectorThread2.setOnSignalsDetectedListener(this)
         detectorThread?.start()

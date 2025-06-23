@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.findmyphone.MainActivity
-import com.example.findmyphone.R
+import com.findmyphone.clapping.clapfinder.soundalert.R
 import com.example.findmyphone.data.other.NotificationRepository
 import com.example.findmyphone.utils.AppConstants.FIND_MY_PHONE_ID
 import com.example.findmyphone.utils.AppConstants.FIND_MY_PHONE_CHANNEL_NAME

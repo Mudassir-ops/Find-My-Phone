@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.findmyphone.databinding.ItemRingtoneBinding
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.ItemRingtoneBinding
 
 class FindMyPhoneRingtoneAdapter(
     private val callbackSelection: (RingtoneModels) -> Unit

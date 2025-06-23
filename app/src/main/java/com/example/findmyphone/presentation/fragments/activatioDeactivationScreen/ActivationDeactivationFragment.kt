@@ -11,8 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieDrawable
-import com.example.findmyphone.R
-import com.example.findmyphone.databinding.FragmentActivationDeactivationBinding
+import com.findmyphone.clapping.clapfinder.soundalert.R
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentActivationDeactivationBinding
 import com.example.findmyphone.presentation.viewmodels.HomeViewModel
 import com.example.findmyphone.utils.viewBinding
 import kotlinx.coroutines.launch

@@ -3,8 +3,9 @@ package com.example.findmyphone
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import com.example.findmyphone.databinding.ActivityMainBinding
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.ActivityMainBinding
 import com.example.findmyphone.utils.SessionManager
+import com.findmyphone.clapping.clapfinder.soundalert.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
