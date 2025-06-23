@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.bsh.commands.dir
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,21 +7,25 @@ plugins {
     alias(libs.plugins.safe.args)
     id("kotlin-kapt")
     id("kotlin-parcelize")
-
+    id("com.chaquo.python")
 }
 
 android {
-    namespace = "com.example.findmyphone"
+    namespace = "com.findmyphone.clapping.clapfinder.soundalert"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.findmyphone"
+        applicationId = "com.findmyphone.clapping.clapfinder.soundalert"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            // On Apple silicon, you can omit x86_64.
+            abiFilters += listOf("arm64-v8a", "x86_64")
+        }
     }
 
     buildTypes {
@@ -42,7 +48,26 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+//    repositories {
+//        flatDir {
+//            dirs("libs")
+//        }
+//    }
 }
+
+chaquopy {
+    defaultConfig {
+        version = "3.8"
+        pip {
+//            install("numpy")
+//            install("python_speech_features")
+//            install("scipy")
+//            install("fastdtw")
+        }
+    }
+}
+
 
 dependencies {
 
@@ -77,5 +102,10 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     kapt(libs.androidx.room.compiler.v250)
 
-  //  implementation(files("libs/musicg-1.4.2.0.jar"))
+    implementation(files("libs/TarsosDSPKit-release.aar"))
+
+//
+//    implementation("be.tarsos.dsp:core:2.5")
+    // implementation("be.tarsos.dsp:jvm:2.5")
+    //  implementation(files("libs/musicg-1.4.2.0.jar"))
 }

@@ -47,6 +47,7 @@ class DetectionRepositoryImpl @Inject constructor(private val sessionManager: Se
     private var mediaPlayer: MediaPlayer? = null
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private var isRingtonePlaying = false
 
 
     override fun onWhistleDetected(context: Context) {
@@ -69,7 +70,7 @@ class DetectionRepositoryImpl @Inject constructor(private val sessionManager: Se
         isDoubleClap = timeSinceLastClap <= clapThreshold
         val currentVisibleApp = sessionManager.getCurrentAppForClapDetection()
         Logs.createLog("isDoubleClap---$isDoubleClap--$currentVisibleApp")
-        if (isDoubleClap && (currentVisibleApp == (context.packageName ?: ""))) {
+        if ((currentVisibleApp == (context.packageName ?: ""))) {
             playRingtone(context)
             vibrateDevice(context)
             if (sessionManager.isFlashlightOn() == true) {
@@ -94,16 +95,20 @@ class DetectionRepositoryImpl @Inject constructor(private val sessionManager: Se
     private fun playRingtone(context: Context) {
         if (mediaPlayer?.isPlaying == true) return
 
+        isRingtonePlaying = true  // ⬅️ start suppression
+
         mediaPlayer?.apply {
             stop()
             reset()
             release()
         }
+
         val selectedRingtone = sessionManager.getRingtone()
         val scaledVolume = when (val volumeLevel = sessionManager.getVolumeLevel()) {
             in 0..100 -> (volumeLevel?.toFloat() ?: 20F) / 100f
             else -> 0.5f
         }
+
         val uri = Uri.parse("android.resource://${context.packageName}/$selectedRingtone")
         mediaPlayer = MediaPlayer().apply {
             try {
@@ -114,10 +119,12 @@ class DetectionRepositoryImpl @Inject constructor(private val sessionManager: Se
                     reset()
                     release()
                     mediaPlayer = null
+                    isRingtonePlaying = false  // ⬅️ resume detection
                 }
                 prepare()
                 setVolume(scaledVolume, scaledVolume)
                 start()
+
                 scope.launch {
                     delay(5000)
                     if (isPlaying) {
@@ -125,6 +132,7 @@ class DetectionRepositoryImpl @Inject constructor(private val sessionManager: Se
                         reset()
                         release()
                         mediaPlayer = null
+                        isRingtonePlaying = false  // ⬅️ also reset here
                     }
                 }
 
@@ -132,9 +140,11 @@ class DetectionRepositoryImpl @Inject constructor(private val sessionManager: Se
                 e.printStackTrace()
                 release()
                 mediaPlayer = null
+                isRingtonePlaying = false
             }
         }
     }
+
 
 
     private fun vibrateDevice(context: Context) {

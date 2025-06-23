@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Find My Phone</string>
+    <string name="app_name">Zoom Magnifier with Flashlight</string>
     <string name="find_my_phone">Find My Phone</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
@@ -118,4 +118,5 @@
     <string name="feature_is_activated">Feature is Activated</string>
     <string name="back_to_home_page">Back to home page</string>
     <string name="feature_is_deactivated">Feature is Deactivated</string>
+    <string name="sound_alert">Sound Alert</string>
 </resources>

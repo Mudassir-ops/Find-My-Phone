@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.findmyphone.R
-import com.example.findmyphone.databinding.FragmentOnGoingFragmentItemBinding
+import com.findmyphone.clapping.clapfinder.soundalert.R
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentOnGoingFragmentItemBinding
 import com.example.findmyphone.domain.OnGoingScreenModel
 import com.example.findmyphone.utils.AppConstants.ON_GOING_DATA_MODEL
 import com.example.findmyphone.utils.viewBinding

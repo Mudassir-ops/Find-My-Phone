@@ -1,7 +1,7 @@
 package com.example.findmyphone.utils
 
 import android.content.SharedPreferences
-import com.example.findmyphone.R
+import com.findmyphone.clapping.clapfinder.soundalert.R
 import com.example.findmyphone.utils.AppConstants.CURRENT_APP_FOR_DETECTION
 import com.example.findmyphone.utils.AppConstants.DEACTIVATION_TIME
 import com.example.findmyphone.utils.AppConstants.DETECTION_MODE

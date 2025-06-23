@@ -6,7 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
-import com.example.findmyphone.R
+import com.findmyphone.clapping.clapfinder.soundalert.R
 import com.google.android.material.textview.MaterialTextView
 
 @BindingAdapter("android:text")

@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.findmyphone.R
-import com.example.findmyphone.databinding.FragmentHomeFindMyPhoneBinding
-import com.example.findmyphone.databinding.FragmentRingtoneBinding
+import com.findmyphone.clapping.clapfinder.soundalert.R
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentHomeFindMyPhoneBinding
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentRingtoneBinding
 import com.example.findmyphone.presentation.fragments.home.FindMyPhoneRingtoneAdapter
 import com.example.findmyphone.presentation.fragments.home.RingtoneModels
 import com.example.findmyphone.presentation.viewmodels.HomeViewModel

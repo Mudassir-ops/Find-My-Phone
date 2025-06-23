@@ -4,7 +4,7 @@ import android.widget.CheckBox
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.navigation.NavController
 import androidx.viewpager2.widget.ViewPager2
-import com.example.findmyphone.R
+import com.findmyphone.clapping.clapfinder.soundalert.R
 import com.example.findmyphone.utils.SessionManager
 import com.google.android.material.button.MaterialButton
 

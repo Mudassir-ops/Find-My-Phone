@@ -14,8 +14,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.findmyphone.R
-import com.example.findmyphone.databinding.FragmentPermissionFindMyPhoneBinding
+import com.findmyphone.clapping.clapfinder.soundalert.R
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentPermissionFindMyPhoneBinding
 import com.example.findmyphone.utils.viewBinding
 
 @SuppressLint("InlinedApi")

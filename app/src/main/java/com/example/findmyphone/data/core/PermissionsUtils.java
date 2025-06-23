@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.findmyphone.R;
+import com.findmyphone.clapping.clapfinder.soundalert.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.findmyphone.R
-import com.example.findmyphone.databinding.FragmentOnGoingParentBinding
+import com.findmyphone.clapping.clapfinder.soundalert.R
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentOnGoingParentBinding
 import com.example.findmyphone.domain.OnGoingScreenModel
 import com.example.findmyphone.utils.AppConstants.ON_GOING_DATA_MODEL
 import com.example.findmyphone.utils.SessionManager

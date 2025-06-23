@@ -1,18 +1,11 @@
 package com.example.findmyphone.presentation.fragments.home
 
-import android.app.Activity
-import android.app.AppOpsManager
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.activity.addCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -21,18 +14,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieDrawable
-import com.example.findmyphone.R
-import com.example.findmyphone.data.core.DetectionServiceForeground
-import com.example.findmyphone.data.other.DetectionRepository
-import com.example.findmyphone.databinding.FragmentHomeFindMyPhoneBinding
+import com.example.findmyphone.data.core.ClapCounterService
 import com.example.findmyphone.presentation.viewmodels.HomeViewModel
-import com.example.findmyphone.utils.Logs
 import com.example.findmyphone.utils.MediaPlayerManager
 import com.example.findmyphone.utils.SessionManager
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.showExitDialog
 import com.example.findmyphone.utils.showOverlay
 import com.example.findmyphone.utils.viewBinding
+import com.findmyphone.clapping.clapfinder.soundalert.R
+import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentHomeFindMyPhoneBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -172,7 +163,7 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
         return try {
             viewModel.isServiceRunning(isServiceRunning = true)
             val ctx = context ?: return false
-            val serviceIntent = Intent(ctx, DetectionServiceForeground::class.java)
+            val serviceIntent = Intent(ctx, ClapCounterService::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
                 showOverlay(ctx) {
                     ContextCompat.startForegroundService(ctx, serviceIntent)
@@ -199,7 +190,7 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
             context?.stopService(
                 Intent(
                     context ?: return false,
-                    DetectionServiceForeground::class.java
+                    ClapCounterService::class.java
                 )
             )
             true
@@ -247,42 +238,6 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
     override fun onDestroyView() {
         super.onDestroyView()
         mediaPlayerManager?.stop()
-    }
-
-    private fun requestUsageStatsPermission() {
-        if (!isUsageStatsPermissionGranted()) {
-            val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            requestUsageStatsPermission.launch(intent)
-        } else {
-            startService()
-        }
-    }
-
-    private fun isUsageStatsPermissionGranted(): Boolean {
-        val appOps = context?.getSystemService(AppOpsManager::class.java)
-        val mode = context?.packageName?.let {
-            appOps?.checkOpNoThrow(
-                AppOpsManager.OPSTR_GET_USAGE_STATS,
-                android.os.Process.myUid(),
-                it
-            )
-        }
-        return mode == AppOpsManager.MODE_ALLOWED
-    }
-
-    private val requestUsageStatsPermission = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val resultService = startService()
-            if (resultService) {
-                navigateToActivationDeactivationScreen()
-            }
-            Log.d("UsageStats", "Permission granted")
-        } else {
-            // Permission not granted, inform the user
-            Log.d("UsageStats", "Permission not granted")
-        }
     }
 
     private fun navigateToActivationDeactivationScreen() {
