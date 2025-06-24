@@ -26,10 +26,16 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
 import com.findmyphone.clapping.clapfinder.soundalert.R
 import com.example.findmyphone.presentation.fragments.home.HomeFragmentFindMyPhone
@@ -94,7 +100,8 @@ fun Activity.privacyPolicyUrl() {
         this.startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                        Uri.parse(this.getString(R.string.privacy_policy_link)))
+                Uri.parse(this.getString(R.string.privacy_policy_link))
+            )
 
         )
 
@@ -321,3 +328,17 @@ fun View.asPixels(value: Int): Int {
     return dpAsPixels.toInt()
 }
 
+
+fun setStatusBarColor(window: Window, color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+            val statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars())
+            view.setBackgroundColor(color)
+            view.setPadding(0, statusBarInsets.top, 0, 0)
+            insets
+        }
+    } else {
+        // For Android 14 and below
+        window.statusBarColor = color
+    }
+}

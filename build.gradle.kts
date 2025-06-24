@@ -5,5 +5,5 @@ plugins {
     alias(libs.plugins.dagger.hilt) apply false
     alias(libs.plugins.safe.args) apply false
     alias(libs.plugins.org.jetbrains.kotlin.kapt) apply false
-    id("com.chaquo.python") version "16.1.0" apply false
+   // id("com.chaquo.python") version "16.1.0" apply false
 }

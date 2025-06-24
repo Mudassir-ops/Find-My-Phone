@@ -18,6 +18,7 @@ import com.example.findmyphone.data.core.ClapCounterService
 import com.example.findmyphone.presentation.viewmodels.HomeViewModel
 import com.example.findmyphone.utils.MediaPlayerManager
 import com.example.findmyphone.utils.SessionManager
+import com.example.findmyphone.utils.all_extension.toast
 import com.example.findmyphone.utils.dialogs.ExitDialog
 import com.example.findmyphone.utils.showExitDialog
 import com.example.findmyphone.utils.showOverlay
@@ -130,6 +131,9 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
                     navController.navigate(R.id.action_navigation_home_fragment_to_navigation_settings)
                 }
             }
+            layoutSelectPhone.setOnClickListener {
+                activity?.toast("Coming Soon")
+            }
             switchFlashlight.setOnClickListener {
                 val isOn = switchFlashlight.isChecked
                 if (isOn) {
@@ -156,6 +160,7 @@ class HomeFragmentFindMyPhone : Fragment(R.layout.fragment_home_find_my_phone) {
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
             this@HomeFragmentFindMyPhone.showExitDialog(fragmentManager = childFragmentManager)
         }
+
 
     }
 

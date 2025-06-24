@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.safe.args)
     id("kotlin-kapt")
     id("kotlin-parcelize")
-    id("com.chaquo.python")
+   // id("com.chaquo.python")
 }
 
 android {
@@ -23,10 +23,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "Find_My_phone-v$versionCode($versionName)")
-        ndk {
-            // On Apple silicon, you can omit x86_64.
-            abiFilters += listOf("arm64-v8a", "x86_64")
-        }
+//        ndk {
+//            // On Apple silicon, you can omit x86_64.
+//            abiFilters += listOf("arm64-v8a", "x86_64")
+//        }
     }
 
     buildTypes {
@@ -57,17 +57,17 @@ android {
 //    }
 }
 
-chaquopy {
-    defaultConfig {
-        version = "3.8"
-        pip {
-//            install("numpy")
-//            install("python_speech_features")
-//            install("scipy")
-//            install("fastdtw")
-        }
-    }
-}
+//chaquopy {
+//    defaultConfig {
+//        version = "3.8"
+//        pip {
+////            install("numpy")
+////            install("python_speech_features")
+////            install("scipy")
+////            install("fastdtw")
+//        }
+//    }
+//}
 
 
 dependencies {

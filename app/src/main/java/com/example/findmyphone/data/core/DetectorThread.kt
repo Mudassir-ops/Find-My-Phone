@@ -2,22 +2,16 @@ package com.example.findmyphone.data.core
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.AudioProcessor
 import be.tarsos.dsp.io.TarsosDSPAudioFormat
 import be.tarsos.dsp.io.UniversalAudioInputStream
-import be.tarsos.dsp.io.android.AudioDispatcherFactory
 import be.tarsos.dsp.mfcc.MFCC
-import com.chaquo.python.PyObject
-import com.chaquo.python.Python
 import com.example.findmyphone.TEST.musicg.api.ClapApi
 import com.example.findmyphone.TEST.musicg.api.WhistleApi
 import com.example.findmyphone.TEST.musicg.wave.WaveHeader
-import com.example.findmyphone.utils.Logs
 import com.example.findmyphone.utils.Logs.createLog
 import com.example.findmyphone.utils.SessionManager
 import java.io.BufferedInputStream
@@ -138,10 +132,11 @@ class DetectorThread(
                 clapCandidateTime = now
                 Log.d("ClapExtension", "🔍 Possible clap started at: $distance")
             }
+
             isClapCandidate && now - clapCandidateTime <= CLAP_WINDOW_MS && distance in CLAP_MIN..CLAP_MAX -> {
                 isClapCandidate = false
                 Log.d("ClapExtension", "✅ Clap confirmed at: $distance")
-              //  onClapDetected()
+                //  onClapDetected()
             }
 
             // If distance exceeds threshold in that window, cancel it
