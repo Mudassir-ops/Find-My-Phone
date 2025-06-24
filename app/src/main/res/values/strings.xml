@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">Find My Phone by Clapping</string>
     <string name="find_my_phone">Find My Phone by Clapping</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
