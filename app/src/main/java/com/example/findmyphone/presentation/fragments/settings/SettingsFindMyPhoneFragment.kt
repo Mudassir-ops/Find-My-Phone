@@ -12,6 +12,7 @@ import com.findmyphone.clapping.clapfinder.soundalert.R
 import com.findmyphone.clapping.clapfinder.soundalert.databinding.FragmentSettingsFindMyPhoneBinding
 import com.example.findmyphone.utils.SessionManager
 import com.example.findmyphone.utils.dialogs.RateUsDialog
+import com.example.findmyphone.utils.privacyPolicyUrl
 import com.example.findmyphone.utils.shareApp
 import com.example.findmyphone.utils.showRateDialog
 import com.example.findmyphone.utils.showTimePicker
@@ -135,6 +136,9 @@ class SettingsFindMyPhoneFragment : Fragment(R.layout.fragment_settings_find_my_
 
             layoutShareApp.setOnClickListener {
                 activity?.shareApp()
+            }
+            layoutPrivacyPolicy.setOnClickListener {
+                activity?.privacyPolicyUrl()
             }
 
         }

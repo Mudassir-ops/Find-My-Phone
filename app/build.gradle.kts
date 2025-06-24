@@ -22,6 +22,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "Find_My_phone-v$versionCode($versionName)")
         ndk {
             // On Apple silicon, you can omit x86_64.
             abiFilters += listOf("arm64-v8a", "x86_64")

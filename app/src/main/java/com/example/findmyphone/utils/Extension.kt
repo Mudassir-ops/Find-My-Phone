@@ -94,15 +94,17 @@ fun Activity.privacyPolicyUrl() {
         this.startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("")
-            )
+                        Uri.parse(this.getString(R.string.privacy_policy_link)))
+
         )
+
     } catch (e: Exception) {
         e.printStackTrace()
         toast(this.getString(R.string.no_launcher))
 
     }
 }
+
 
 fun Activity.shareApp() {
     try {
